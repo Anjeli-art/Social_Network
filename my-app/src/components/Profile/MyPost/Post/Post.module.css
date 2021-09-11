@@ -1,0 +1,13 @@
+.item img{
+    width: 100px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.like{
+    color:white;
+}
+
+.like img{
+  width: 20px;
+}
