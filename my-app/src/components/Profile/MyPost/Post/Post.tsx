@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./Post.module.css"
-import {PostTypeMap} from "../../../../redux/State";
+import {PostTypeMap} from "../../../../redux/Store";
 
 
 

@@ -1,34 +1,35 @@
 import React from "react";
 import s from "./MyPost.module.css"
 import {Post} from "./Post/Post";
-import {PostType} from "../../../redux/State";
+import { PostType} from "../../../redux/Store";
+
+
 
 export type propsTypeMyPost = {
     posts: PostType[]
-    dispatch:(action:any)=>void
-    // addPost: () => void
     NewPost: string
-    // upDateaddPost: (New: string) => void
+    updateNewPostText: (text:string) => void
+    addPost: () => void
 }
 export const MyPost: React.FC<propsTypeMyPost> = (props) => {
 
     let PostElement = props.posts.map(p => <Post message={p.message} likecount={p.likecount}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-    let onButtonClick = () => {
-        props.dispatch({type:"ADD-POST"});
+    let onaddPost = () => {
+        props.addPost();
     }
-    let onChangeText = () => {
+    let onPostText = () => {
         if (newPostElement.current?.value) {
             const text = newPostElement.current.value;
-            props.dispatch({type:"UPDATE-NEW-POST",New:text});
+            props.updateNewPostText(text);
         }
     }
 
     return (
         <div>my post
             <div>
-                <textarea onChange={onChangeText} className={s.input} ref={newPostElement} value={props.NewPost}/>
-                <button className={s.button} onClick={onButtonClick}>+</button>
+                <textarea onChange={onPostText} className={s.input} ref={newPostElement} value={props.NewPost}/>
+                <button className={s.button} onClick={onaddPost}>+</button>
                 <button className={s.button}>x</button>
             </div>
             <div>

@@ -2,16 +2,18 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogType, MessageType} from "../../redux/State";
+import {DialogType, MessageType} from "../../redux/Store";
+
 
 
 type DialogTypeProps = {
-    // addMessage: () => void
+    addMessage: () => void
     messages: MessageType[]
     dialogs: DialogType[]
-    // upDateaddMessage: (New: string) => void
+    upDateaddMessage: (New: string) => void
     newMessage: string
-    dispatch:(action:any)=>void
+    // dispatch: (action: ActionValuesType) => void
+
 }
 
 
@@ -23,17 +25,13 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
 
     let dialogsElement = props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messagesElement = props.messages.map(m => <Message message={m.message}/>)
-    let newMessageElement = React.createRef<HTMLTextAreaElement>()
-    let onButtonClick = () => {
-        props.dispatch({type:"ADD-MESSGE"})
+
+    let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.currentTarget.value
+        props.upDateaddMessage(text)
     }
-
-    let onChangeMessage = () => {
-        if (newMessageElement.current?.value) {
-            const text = newMessageElement.current.value;
-
-            props.dispatch({type:"UPDATE-NEW-MESSAGE",New:text})
-        }
+    let onButtonClick = () => {
+            props.addMessage()
     }
     return (
         <div className={s.dialogs}>
@@ -43,7 +41,7 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
             <div className={s.messages}>
                 {messagesElement}
                 <div>
-                    <textarea className={s.input} onChange={onChangeMessage} ref={newMessageElement}
+                    <textarea className={s.input} onChange={onChangeMessage}
                               value={props.newMessage}/>
                     <button className={s.button} onClick={onButtonClick}>+</button>
                 </div>

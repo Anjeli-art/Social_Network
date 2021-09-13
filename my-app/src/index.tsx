@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {store, StoreType} from "./redux/State";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {App} from "./App";
 import {BrowserRouter} from "react-router-dom";
+import {store} from "./redux/redux-store";
 
 
 export let rerenderEntireThree = () => {
@@ -13,7 +13,9 @@ export let rerenderEntireThree = () => {
 
     ReactDOM.render(
         <BrowserRouter>
-            <App  store={store} dispatch={store.dispatch.bind(store)}/>
+            <App  store={store} />
+            {/*dispatch={store.dispatch.bind(store)}*/}
+
         </BrowserRouter>, document.getElementById('root')
     )
 };

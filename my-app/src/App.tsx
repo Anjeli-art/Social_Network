@@ -8,11 +8,13 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Route} from 'react-router-dom';
 import {Friends} from "./components/Friends/Friends";
-import {Dialogs} from "./components/Dialog/Dialogs";
+import {DialogsContainer} from "./components/Dialog/DialogsContainer";
+import { Store} from "redux";
+import {ActionValuesType, RootStateType} from "./redux/redux-store";
 
 export type AppStateType = {
-    store: any
-    dispatch:(action:any)=>void
+    store: Store<RootStateType, ActionValuesType>
+    // dispatch:(action:any)=>void
 }
 
 
@@ -23,17 +25,17 @@ export const App: React.FC<AppStateType> = (props) => {
             <Header/>
             <Nav/>
             <div className="app-wrapper-content">
-                <Route path="/profile" render={() => <Profile
-                    profile={props.store.getState().profilepage.posts}
-                    NewPost={props.store.getState().profilepage.NewPost}
-                    dispatch={props.dispatch}
+                <Route path="/profile" render={() => <Profile store={props.store}
+                    // profile={props.store.getState().profilepage.posts}
+                    // NewPost={props.store.getState().profilepage.NewPost}
+                    // dispatch={props.dispatch}
                 />}/>
                 <Route path="/dialogs" render={() =>
-                    <Dialogs
-                        dialogs={props.store.getState().dialogepage.dialogs}
-                        messages={props.store.getState().dialogepage.messages}
-                        dispatch={props.dispatch}
-                        newMessage={props.store.getState().dialogepage.NewMessage}
+                    <DialogsContainer store={props.store}
+                        // dialogs={props.store.getState().dialogepage.dialogs}
+                        // messages={props.store.getState().dialogepage.messages}
+                        // dispatch={props.dispatch}
+                        // newMessage={props.store.getState().dialogepage.NewMessage}
 
                     />}/>
                 <Route path="/news" render={() => <News/>}/>
