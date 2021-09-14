@@ -13,7 +13,7 @@ import { Store} from "redux";
 import {ActionValuesType, RootStateType} from "./redux/redux-store";
 
 export type AppStateType = {
-    store: Store<RootStateType, ActionValuesType>
+    // store: Store<RootStateType, ActionValuesType>
     // dispatch:(action:any)=>void
 }
 
@@ -25,13 +25,15 @@ export const App: React.FC<AppStateType> = (props) => {
             <Header/>
             <Nav/>
             <div className="app-wrapper-content">
-                <Route path="/profile" render={() => <Profile store={props.store}
+                <Route path="/profile" render={() => <Profile
+                    // store={props.store}
                     // profile={props.store.getState().profilepage.posts}
                     // NewPost={props.store.getState().profilepage.NewPost}
                     // dispatch={props.dispatch}
                 />}/>
                 <Route path="/dialogs" render={() =>
-                    <DialogsContainer store={props.store}
+                    <DialogsContainer
+                        // store={props.store}
                         // dialogs={props.store.getState().dialogepage.dialogs}
                         // messages={props.store.getState().dialogepage.messages}
                         // dispatch={props.dispatch}

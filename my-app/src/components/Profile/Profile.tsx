@@ -8,7 +8,7 @@ export type propsTypeProfile = {
     // profile: PostType[]
     // dispatch: (action: ActionValuesType) => void
     // NewPost: string
-    store: Store<RootStateType, ActionValuesType>
+    // store: Store<RootStateType, ActionValuesType>
 
 }
 
@@ -18,7 +18,8 @@ export const Profile: React.FC<propsTypeProfile> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostContainer store={props.store} />
+            <MyPostContainer />
+                {/*store={props.store} />*/}
         </div>
     )
 }

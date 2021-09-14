@@ -3,31 +3,46 @@ import {addPostActionCreator, upDateNewPostActionCreator} from "../../../redux/p
 import {MyPost} from "./MyPost";
 import {Store} from "redux";
 import {ActionValuesType, RootStateType} from "../../../redux/redux-store";
+import {StoreContext} from "../../../StoreContext";
 
 
 export type propsTypeMyPost = {
-    store: Store<RootStateType, ActionValuesType>
+    // store: Store<RootStateType, ActionValuesType>
     // posts: PostType[]
     // dispatch:(action:ActionValuesType)=>void
     // NewPost: string
 }
 export const MyPostContainer: React.FC<propsTypeMyPost> = (props) => {
 
-    let state = props.store.getState()
-
-    let onButtonClick = () => {
-        let action = addPostActionCreator()
-        props.store.dispatch(action);
-    }
-    let onChangeText = (text: string) => {
-        let action = upDateNewPostActionCreator(text)
-        props.store.dispatch(action);
-    }
+    // let state = props.store.getState()
+    //
+    // let onButtonClick = () => {
+    //     let action = addPostActionCreator()
+    //     props.store.dispatch(action);
+    // }
+    // let onChangeText = (text: string) => {
+    //     let action = upDateNewPostActionCreator(text)
+    //     props.store.dispatch(action);
+    // }
 
 
     return (
-        <MyPost updateNewPostText={onChangeText} addPost={onButtonClick} posts={state.profilepage.posts}
-                NewPost={state.profilepage.NewPost}/>
+        <StoreContext.Consumer>
+            {(store) => {
+                let state = store.getState()
+
+                let onButtonClick = () => {
+                    let action = addPostActionCreator()
+                    store.dispatch(action);
+                }
+                let onChangeText = (text: string) => {
+                    let action = upDateNewPostActionCreator(text)
+                    store.dispatch(action);
+                }
+
+                return <MyPost updateNewPostText={onChangeText} addPost={onButtonClick} posts={state.profilepage.posts}
+                        NewPost={state.profilepage.NewPost}/>}}
+        </StoreContext.Consumer>
     )
 
 }
