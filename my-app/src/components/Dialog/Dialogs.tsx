@@ -27,6 +27,7 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
     let messagesElement = props.messages.map(m => <Message message={m.message}/>)
 
     let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        console.log("tttttttttt")
         const text = e.currentTarget.value
         props.upDateaddMessage(text)
     }

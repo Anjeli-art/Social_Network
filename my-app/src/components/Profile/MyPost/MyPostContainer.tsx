@@ -3,16 +3,17 @@ import {addPostActionCreator, upDateNewPostActionCreator} from "../../../redux/p
 import {MyPost} from "./MyPost";
 import {Store} from "redux";
 import {ActionValuesType, RootStateType} from "../../../redux/redux-store";
-import {StoreContext} from "../../../StoreContext";
+import { connect } from "react-redux";
 
 
-export type propsTypeMyPost = {
-    // store: Store<RootStateType, ActionValuesType>
-    // posts: PostType[]
-    // dispatch:(action:ActionValuesType)=>void
-    // NewPost: string
-}
-export const MyPostContainer: React.FC<propsTypeMyPost> = (props) => {
+
+// export type propsTypeMyPost = {
+//     // store: Store<RootStateType, ActionValuesType>
+//     // posts: PostType[]
+//     // dispatch:(action:ActionValuesType)=>void
+//     // NewPost: string
+// }
+// export const MyPostContainer: React.FC<propsTypeMyPost> = (props) => {
 
     // let state = props.store.getState()
     //
@@ -26,23 +27,38 @@ export const MyPostContainer: React.FC<propsTypeMyPost> = (props) => {
     // }
 
 
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-                let state = store.getState()
+//     return (
+//         <StoreContext.Consumer>
+//             {(store) => {
+//                 let state = store.getState()
+//
+//                 let onButtonClick = () => {
+//                     let action = addPostActionCreator()
+//                     store.dispatch(action);
+//                 }
+//                 let onChangeText = (text: string) => {
+//                     let action = upDateNewPostActionCreator(text)
+//                     store.dispatch(action);
+//                 }
+//
+//                 return <MyPost updateNewPostText={onChangeText} addPost={onButtonClick} posts={state.profilepage.posts}
+//                         NewPost={state.profilepage.NewPost}/>}}
+//         </StoreContext.Consumer>
+//     )
+//
+// }
 
-                let onButtonClick = () => {
-                    let action = addPostActionCreator()
-                    store.dispatch(action);
-                }
-                let onChangeText = (text: string) => {
-                    let action = upDateNewPostActionCreator(text)
-                    store.dispatch(action);
-                }
-
-                return <MyPost updateNewPostText={onChangeText} addPost={onButtonClick} posts={state.profilepage.posts}
-                        NewPost={state.profilepage.NewPost}/>}}
-        </StoreContext.Consumer>
-    )
-
+const mapStateToProps=(state:RootStateType)=>{
+    return{
+        posts:state.profilepage.posts,
+        NewPost:state.profilepage.NewPost,
+    }
 }
+const mapDispatchToProps=(dispatch:(action: ActionValuesType)=>void)=>{
+    return{
+        updateNewPostText:(text:string)=>{dispatch(upDateNewPostActionCreator(text)) },
+        addPost:()=>{dispatch(addPostActionCreator())},
+    }
+}
+
+export const MyPostContainer=connect(mapStateToProps,mapDispatchToProps)(MyPost)

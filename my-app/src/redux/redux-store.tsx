@@ -8,12 +8,13 @@ export type ActionValuesType =
     | addMessageType
     | upDateNewMessageType
 
-let reducers = combineReducers({
+let RootReducer = combineReducers({
     profilepage: profileReducer,
     dialogepage: dialogsReducer
 })
 
-export type RootStateType = ReturnType<typeof reducers>
+export type RootStateType = ReturnType<typeof RootReducer>
 
-export let store: Store<RootStateType, ActionValuesType> = createStore(reducers)
-console.log('store: ', store)
+export let store: Store<RootStateType, ActionValuesType> = createStore(RootReducer)
+//
+// console.log('store: ', store)

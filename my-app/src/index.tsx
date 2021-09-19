@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {App} from "./App";
 import {BrowserRouter} from "react-router-dom";
 import {store} from "./redux/redux-store";
-import {Provaider, StoreContext} from './StoreContext';
+import {Provider} from "react-redux"
+
 
 
 export let rerenderEntireThree = () => {
@@ -14,10 +15,10 @@ export let rerenderEntireThree = () => {
 
     ReactDOM.render(
         <BrowserRouter>
-            <Provaider store={store}>
+            <Provider store={store}>
                 <App />
                 {/*store={store}*/}
-            </Provaider>
+            </Provider>
         </BrowserRouter>, document.getElementById('root')
     )
 };
