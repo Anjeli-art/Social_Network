@@ -2,7 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogType, MessageType} from "../../redux/Store";
+import {DialogType, MessageType } from "../../redux/dialogs-reducer";
+
 
 
 
@@ -11,7 +12,7 @@ type DialogTypeProps = {
     messages: MessageType[]
     dialogs: DialogType[]
     upDateaddMessage: (New: string) => void
-    newMessage: string
+    NewMessage: string
     // dispatch: (action: ActionValuesType) => void
 
 }
@@ -23,8 +24,8 @@ type DialogTypeProps = {
 
 export const Dialogs: React.FC<DialogTypeProps> = (props) => {
 
-    let dialogsElement = props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElement = props.messages.map(m => <Message message={m.message}/>)
+    let dialogsElement = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messagesElement = props.messages.map(m => <Message key={m.id} message={m.message}/>)
 
     let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         console.log("tttttttttt")
@@ -43,7 +44,7 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
                 {messagesElement}
                 <div>
                     <textarea className={s.input} onChange={onChangeMessage}
-                              value={props.newMessage}/>
+                              value={props.NewMessage}/>
                     <button className={s.button} onClick={onButtonClick}>+</button>
                 </div>
             </div>

@@ -69,20 +69,20 @@ import {addMessageType, upDateNewMessageType} from "./dialogs-reducer";
 // @ts-ignore
 window.store = store
 
-export type PostType = {
-    id: number
-    message: string | undefined
-    likecount: number
-}
+// export type PostType = {
+//     id: number
+//     message: string | undefined
+//     likecount: number
+// }
 
-export type MessageType = {
-    id: number
-    message: string | undefined
-}
-export type DialogType = {
-    id: number
-    name: string
-}
+// export type MessageType = {
+//     id: number
+//     message: string | undefined
+// }
+// export type DialogType = {
+//     id: number
+//     name: string
+// }
 
 // export type ProfilepageType = {
 //     posts: PostType[]

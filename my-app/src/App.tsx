@@ -11,6 +11,7 @@ import {Friends} from "./components/Friends/Friends";
 import {DialogsContainer} from "./components/Dialog/DialogsContainer";
 import { Store} from "redux";
 import {ActionValuesType, RootStateType} from "./redux/redux-store";
+import { Users } from './components/Users/Users';
 
 export type AppStateType = {
     // store: Store<RootStateType, ActionValuesType>
@@ -33,6 +34,15 @@ export const App: React.FC<AppStateType> = (props) => {
                 />}/>
                 <Route path="/dialogs" render={() =>
                     <DialogsContainer
+                        // store={props.store}
+                        // dialogs={props.store.getState().dialogepage.dialogs}
+                        // messages={props.store.getState().dialogepage.messages}
+                        // dispatch={props.dispatch}
+                        // newMessage={props.store.getState().dialogepage.NewMessage}
+
+                    />}/>
+                <Route path="/users" render={() =>
+                    <Users
                         // store={props.store}
                         // dialogs={props.store.getState().dialogepage.dialogs}
                         // messages={props.store.getState().dialogepage.messages}

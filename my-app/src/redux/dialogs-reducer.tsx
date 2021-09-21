@@ -1,5 +1,4 @@
 import React from 'react';
-import { DialogType, MessageType} from "./Store";
 import {ActionValuesType} from "./redux-store";
 
 const ADD_MESSGE = "ADD-MESSGE"
@@ -18,6 +17,14 @@ export const upDateNewMessageActionCreator = (text: string): upDateNewMessageTyp
     type: UPDATE_NEW_MESSAGE,
     New: text
 })//типизация двух видов тут и в экшнкреэйторе
+export type MessageType = {
+    id: number
+    message: string | undefined
+}
+export type DialogType = {
+    id: number
+    name: string
+}
 
 export type InitDialogsStateType = {
     messages: MessageType[]
@@ -45,13 +52,11 @@ let initialstate: InitDialogsStateType = {
 export const dialogsReducer = (state = initialstate, action: ActionValuesType): InitDialogsStateType => {
     switch (action.type) {
         case ADD_MESSGE:
-            let newMessage = {id: 5, message: state.NewMessage}
-            state.messages.push(newMessage)
-            state.NewMessage = ""
-            return state
+            return {...state, messages: [...state.messages, {id: 5, message: state.NewMessage}], NewMessage: ""}
+
         case UPDATE_NEW_MESSAGE:
-            state.NewMessage = action.New
-            return state
+            return {...state, NewMessage: action.New}
+
         default:
             return state
     }

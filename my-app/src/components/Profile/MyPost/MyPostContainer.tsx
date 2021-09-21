@@ -1,5 +1,5 @@
 import React from "react";
-import {addPostActionCreator, upDateNewPostActionCreator} from "../../../redux/profile-reducer";
+import {addPostActionCreator, initialProfilePageType, upDateNewPostActionCreator} from "../../../redux/profile-reducer";
 import {MyPost} from "./MyPost";
 import {Store} from "redux";
 import {ActionValuesType, RootStateType} from "../../../redux/redux-store";
@@ -48,7 +48,9 @@ import { connect } from "react-redux";
 //
 // }
 
-const mapStateToProps=(state:RootStateType)=>{
+
+
+const mapStateToProps=(state:RootStateType):initialProfilePageType=>{
     return{
         posts:state.profilepage.posts,
         NewPost:state.profilepage.NewPost,

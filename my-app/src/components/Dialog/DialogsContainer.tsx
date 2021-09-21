@@ -1,7 +1,6 @@
 import React, {ChangeEvent} from "react";
-import {addMessageActionCreator, upDateNewMessageActionCreator} from "../../redux/dialogs-reducer";
+import {addMessageActionCreator, InitDialogsStateType, upDateNewMessageActionCreator} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
-// import {Store} from "redux";
 import {ActionValuesType, RootStateType} from "../../redux/redux-store";
 import { connect } from "react-redux";
 
@@ -54,11 +53,14 @@ import { connect } from "react-redux";
 //         </StoreContext.Consumer>
 //     )
 // }
-let mapStateToProps=(state:RootStateType)=>{
+
+
+
+let mapStateToProps=(state:RootStateType):InitDialogsStateType=>{
     return{
         dialogs:state.dialogepage.dialogs,
         messages:state.dialogepage.messages,
-        newMessage:state.dialogepage.NewMessage
+        NewMessage:state.dialogepage.NewMessage
     }
 }
 let mapDicpatchtoProps=(dispatch:(action: ActionValuesType) => void)=>{
