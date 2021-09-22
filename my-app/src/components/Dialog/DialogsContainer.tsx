@@ -3,6 +3,7 @@ import {addMessageActionCreator, InitDialogsStateType, upDateNewMessageActionCre
 import {Dialogs} from "./Dialogs";
 import {ActionValuesType, RootStateType} from "../../redux/redux-store";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 
 
@@ -54,7 +55,10 @@ import { connect } from "react-redux";
 //     )
 // }
 
-
+type mapDicpatch={
+    upDateaddMessage:(text:string)=>void
+    addMessage:()=>void
+}
 
 let mapStateToProps=(state:RootStateType):InitDialogsStateType=>{
     return{
@@ -63,7 +67,10 @@ let mapStateToProps=(state:RootStateType):InitDialogsStateType=>{
         NewMessage:state.dialogepage.NewMessage
     }
 }
-let mapDicpatchtoProps=(dispatch:(action: ActionValuesType) => void)=>{
+
+//(action: ActionValuesType) => void типизация для экшена внутри диспатча и та и та запись валидна смотреть другие компонеты
+
+let mapDicpatchtoProps=(dispatch:Dispatch):mapDicpatch=>{
     return{
         upDateaddMessage:(text:string)=>{dispatch(upDateNewMessageActionCreator(text))},
         addMessage:()=>{dispatch(addMessageActionCreator())},

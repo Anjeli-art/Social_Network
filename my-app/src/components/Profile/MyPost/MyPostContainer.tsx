@@ -48,7 +48,10 @@ import { connect } from "react-redux";
 //
 // }
 
-
+type mapDispatch={
+    updateNewPostText:(text:string)=>void,
+    addPost:()=>void
+}
 
 const mapStateToProps=(state:RootStateType):initialProfilePageType=>{
     return{
@@ -56,7 +59,7 @@ const mapStateToProps=(state:RootStateType):initialProfilePageType=>{
         NewPost:state.profilepage.NewPost,
     }
 }
-const mapDispatchToProps=(dispatch:(action: ActionValuesType)=>void)=>{
+const mapDispatchToProps=(dispatch:(action: ActionValuesType)=>void):mapDispatch=>{
     return{
         updateNewPostText:(text:string)=>{dispatch(upDateNewPostActionCreator(text)) },
         addPost:()=>{dispatch(addPostActionCreator())},
