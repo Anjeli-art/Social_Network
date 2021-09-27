@@ -9,9 +9,9 @@ import {Settings} from "./components/Settings/Settings";
 import {Route} from 'react-router-dom';
 import {Friends} from "./components/Friends/Friends";
 import {DialogsContainer} from "./components/Dialog/DialogsContainer";
-import { Store} from "redux";
+import {Store} from "redux";
 import {ActionValuesType, RootStateType} from "./redux/redux-store";
-import { Userscontainer } from './components/Users/Userscontainer';
+import {Userscontainer} from './components/Users/Userscontainer';
 
 
 export type AppStateType = {
@@ -54,7 +54,6 @@ export const App: React.FC<AppStateType> = (props) => {
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>
-                <Route path="/friends" render={() => <Friends/>}/>
             </div>
         </div>
 

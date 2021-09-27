@@ -1,7 +1,7 @@
 import {combineReducers, createStore, Store} from "redux";
 import {addPostActionCreator, profileReducer, upDateNewPostActionCreator} from "./profile-reducer";
 import {addMessageType, dialogsReducer, upDateNewMessageType} from "./dialogs-reducer";
-import {foolowAC, setUserAC, unfoolowAC, userReducer } from "./users-reducer";
+import {foolowAC, setCurrentPageAC, setTotalUsersCountAC, setUserAC, unfoolowAC, userReducer } from "./users-reducer";
 
 export type ActionValuesType =
     ReturnType<typeof addPostActionCreator>
@@ -11,6 +11,8 @@ export type ActionValuesType =
     |ReturnType<typeof foolowAC>
     |ReturnType<typeof unfoolowAC>
     |ReturnType<typeof setUserAC>
+    |ReturnType<typeof setCurrentPageAC>
+    |ReturnType<typeof setTotalUsersCountAC>
 
 let RootReducer = combineReducers({
     profilepage: profileReducer,
