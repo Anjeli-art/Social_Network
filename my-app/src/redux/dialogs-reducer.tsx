@@ -12,11 +12,7 @@ export type upDateNewMessageType = {
     New: string
 }
 
-export const addMessageActionCreator = (): addMessageType => ({type: ADD_MESSGE})
-export const upDateNewMessageActionCreator = (text: string): upDateNewMessageType => ({
-    type: UPDATE_NEW_MESSAGE,
-    New: text
-})//типизация двух видов тут и в экшнкреэйторе
+
 export type MessageType = {
     id: number
     message: string | undefined
@@ -61,3 +57,9 @@ export const dialogsReducer = (state = initialstate, action: ActionValuesType): 
             return state
     }
 }
+
+export const addMessageActionCreator = (): addMessageType => ({type: ADD_MESSGE})
+export const upDateNewMessageActionCreator = (text: string): upDateNewMessageType => ({
+    type: UPDATE_NEW_MESSAGE,
+    New: text
+})//типизация двух видов тут и в экшнкреэйторе

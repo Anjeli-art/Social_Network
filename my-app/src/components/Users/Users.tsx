@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React from 'react';
 import {UserType} from '../../redux/users-reducer';
 import s from "./Users.module.css"
 import userphoto from "../../assets/images/images.jpg"
+import {NavLink} from 'react-router-dom';
+
 
 type propsType = {
     users: Array<UserType>
@@ -35,7 +36,11 @@ export const Users: React.FC<propsType> = (props) => {
             </div>
             {props.users.map((el) => <div key={el.id} className={s.userprofile}>
                 <div>
-                    <div><img src={el.photos.small !== null ? el.photos.small : userphoto}/></div>
+                    <div>
+                        <NavLink to={"/profile" + "/" + el.id}>
+                            <img src={el.photos.small !== null ? el.photos.small : userphoto}/>
+                        </NavLink>
+                    </div>
                     <div>
                         {el.foolow ? <button onClick={() => {
                             props.unfollow(el.id)
