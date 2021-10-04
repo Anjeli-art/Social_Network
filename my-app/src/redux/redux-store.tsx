@@ -6,7 +6,7 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleisFething,
+    toggleisFething, toggleisFollowig,
     unfollow,
     userReducer
 } from "./users-reducer";
@@ -25,6 +25,8 @@ export type ActionValuesType =
     | ReturnType<typeof toggleisFething>
     | ReturnType<typeof setUsersProfile>
     | ReturnType<typeof setAuth>
+    | ReturnType<typeof toggleisFollowig>
+
 
 let RootReducer = combineReducers({
     profilepage: profileReducer,

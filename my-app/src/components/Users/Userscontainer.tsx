@@ -8,11 +8,12 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleisFething,
+    toggleisFething, toggleisFollowig,
     unfollow,
     UserType
 } from '../../redux/users-reducer';
 import {Users} from './Users';
+import {usersApi} from "../../api/api";
 
 
 type  MapDispatch = {
@@ -22,6 +23,7 @@ type  MapDispatch = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleisFething: (isFetching: boolean) => void
+    toggleisFollowig:(togglefollow: boolean,id:number) =>void
 }
 
 
@@ -31,6 +33,7 @@ type MapStateToProps = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followngInProgress: Array<number>
 
 }
 
@@ -41,19 +44,19 @@ class UsersAPIComponent extends React.Component<UsesrApiType> {
 
     componentDidMount() {
         this.props.toggleisFething(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.toggleisFething(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
+            this.props.setUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
         })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleisFething(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        usersApi.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.toggleisFething(false)
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         })
     }
 
@@ -67,7 +70,9 @@ class UsersAPIComponent extends React.Component<UsesrApiType> {
                        pageSize={this.props.pageSize}
                        totalUsersCount={this.props.totalUsersCount}
                        currentPage={this.props.currentPage}
-                       onPageChanged={this.onPageChanged}/>
+                       onPageChanged={this.onPageChanged}
+                       toggleisFollowig={this.props.toggleisFollowig}
+                       followngInProgress={this.props.followngInProgress}/>
             </div>
         )
     }
@@ -80,7 +85,8 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
         pageSize: state.userspage.pageSize,
         totalUsersCount: state.userspage.totalUsersCount,
         currentPage: state.userspage.currentPage,
-        isFetching: state.userspage.isFetching
+        isFetching: state.userspage.isFetching,
+        followngInProgress: state.userspage.followngInProgress
     }
 }
 
@@ -115,5 +121,5 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsers,
     setTotalUsersCount,
     setCurrentPage,
-    toggleisFething
+    toggleisFething, toggleisFollowig
 })(UsersAPIComponent)//второй объект мап диспатч название контейнера можно опустить
