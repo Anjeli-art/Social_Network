@@ -1,5 +1,6 @@
 import React from 'react';
 import {ActionValuesType} from "./redux-store";
+import {profileApi} from "../api/api";
 
 
 const ADD_POST = "ADD-POST"
@@ -90,3 +91,12 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
 export const addPostActionCreator = () => ({type: ADD_POST}) as const
 export const upDateNewPostActionCreator = (text: string) => ({type: UPDATE_NEW_POST, New: text}) as const//типизация двух видов тут и в экшнкреэйторе
 export const setUsersProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const
+
+export const getProfileUser = (userId: string) => {
+    return (dispath: any) => {///////////////////////////////////////////////////////////////////типизация
+        profileApi.getProfile(userId).then(data => {
+            dispath(setUsersProfile(data))
+        })
+
+    }
+}

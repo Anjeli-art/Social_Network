@@ -3,8 +3,7 @@ import {UserType} from '../../redux/users-reducer';
 import s from "./Users.module.css"
 import userphoto from "../../assets/images/images.jpg"
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
-import {subscriptionApi} from "../../api/api";
+
 
 
 type propsType = {
@@ -15,7 +14,7 @@ type propsType = {
     totalUsersCount: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
-    toggleisFollowig: (togglefollow: boolean,id:number) => void
+    // toggleisFollowig: (togglefollow: boolean,id:number) => void
     followngInProgress: Array<number>
 }
 
@@ -48,22 +47,24 @@ export const Users: React.FC<propsType> = (props) => {
                     <div>
                         {el.followed ?
                             <button disabled={props.followngInProgress.some(id => id === el.id)} onClick={() => {
-                                props.toggleisFollowig(true,el.id)
-                                subscriptionApi.getSubscriptionDelete(el.id).then(data => {
-                                    if (data.resultCode == 0) {
-                                        props.unfollow(el.id)
-                                    }
-                                    props.toggleisFollowig(false,el.id)
-                                })
+                                props.unfollow(el.id)
+                                // props.toggleisFollowig(true,el.id)
+                                // usersApi.getSubscriptionDelete(el.id).then(data => {
+                                //     if (data.resultCode == 0) {
+                                //         props.unfollow(el.id)
+                                //     }
+                                //     props.toggleisFollowig(false,el.id)
+                                // })
                             }}>unfollow</button> : <button disabled={props.followngInProgress.some(id => id === el.id)} onClick={() => {
-                                props.toggleisFollowig(true,el.id)
-                                subscriptionApi.getSubscriptionPost(el.id).then(data => {
-                                        if (data.resultCode == 0) {
-                                            props.follow(el.id)
-                                        }
-                                        props.toggleisFollowig(false,el.id)
-                                    }
-                                )
+                               props.follow(el.id)
+                                // props.toggleisFollowig(true,el.id)
+                                // usersApi.getSubscriptionPost(el.id).then(data => {
+                                //         if (data.resultCode == 0) {
+                                //             props.follow(el.id)
+                                //         }
+                                //         props.toggleisFollowig(false,el.id)
+                                //     }
+                                // )
                             }}>follow</button>}
                     </div>
                 </div>

@@ -14,18 +14,7 @@ export const usersApi = {
             return response.data
         })
 
-    }
-}
-
-export const authApi = {
-    getAuth: () => {
-        return instatce.get(`/auth/me`).then(response => {
-            return response.data
-        })
-    }
-}
-
-export const subscriptionApi = {
+    },
     getSubscriptionDelete: (id: number) => {
         return instatce.delete(`/follow/${id}`).then(response => {
             return response.data
@@ -33,6 +22,14 @@ export const subscriptionApi = {
     },
     getSubscriptionPost: (id: number) => {
         return instatce.post(`/follow/${id}`).then(response => {
+            return response.data
+        })
+    }
+}
+
+export const authApi = {
+    getAuth: () => {
+        return instatce.get(`/auth/me`).then(response => {
             return response.data
         })
     }
