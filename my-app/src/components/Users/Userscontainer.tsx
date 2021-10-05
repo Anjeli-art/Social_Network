@@ -9,6 +9,8 @@ import {
     UserType
 } from '../../redux/users-reducer';
 import {Users} from './Users';
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+
 
 
 type  MapDispatch = {
@@ -70,7 +72,7 @@ class UsersAPIComponent extends React.Component<UsesrApiType> {
                        totalUsersCount={this.props.totalUsersCount}
                        currentPage={this.props.currentPage}
                        onPageChanged={this.onPageChanged}
-                       // toggleisFollowig={this.props.toggleisFollowig}
+                    // toggleisFollowig={this.props.toggleisFollowig}
                        followngInProgress={this.props.followngInProgress}/>
             </div>
         )
@@ -113,9 +115,10 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 //     }
 // }
 
+// let AuthRedirectComponent = WithAuthRedirect(UsersAPIComponent)
 
-export const UsersContainer = connect(mapStateToProps, {
-    follow,unfollow,
+export const UsersContainer = WithAuthRedirect(connect(mapStateToProps, {
+    follow, unfollow,
     // setUsers,
     // setTotalUsersCount,//сократили количество экшенкрейт,все диспатчатся внутри санок
     setCurrentPage,
@@ -123,4 +126,4 @@ export const UsersContainer = connect(mapStateToProps, {
     // toggleisFollowig,//connect внутри себя оборачивает в колл-бэк до 117 стр на этой странице
     getUsers,
     getPageBold
-})(UsersAPIComponent)//второй объект мап диспатч название контейнера можно опустить
+})(UsersAPIComponent))//второй объект мап диспатч название контейнера можно опустить

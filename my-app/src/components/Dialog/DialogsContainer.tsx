@@ -1,11 +1,14 @@
 import React from "react";
-import {addMessageActionCreator, InitDialogsStateType, upDateNewMessageActionCreator} from "../../redux/dialogs-reducer";
+import {
+    addMessageActionCreator, DialogType,
+    MessageType,
+    upDateNewMessageActionCreator
+} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
-import { RootStateType} from "../../redux/redux-store";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-
-
+import {RootStateType} from "../../redux/redux-store";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 // type DialogTypeProps = {
@@ -26,16 +29,16 @@ import { Dispatch } from "redux";
 // export const DialogsContainer: React.FC<DialogTypeProps> = (props) => {
 
 
-    // let state = props.store.getState()
-    //
-    // let onChangeMessage = (text: string) => {
-    //     let action = upDateNewMessageActionCreator(text)
-    //     props.store.dispatch(action)
-    // }
-    // let onButtonClick = () => {
-    //     let action = addMessageActionCreator()
-    //     props.store.dispatch(action)
-    // }
+// let state = props.store.getState()
+//
+// let onChangeMessage = (text: string) => {
+//     let action = upDateNewMessageActionCreator(text)
+//     props.store.dispatch(action)
+// }
+// let onButtonClick = () => {
+//     let action = addMessageActionCreator()
+//     props.store.dispatch(action)
+// }
 //     return (
 //         <StoreContext.Consumer>
 //             {(store)=>{
@@ -55,27 +58,45 @@ import { Dispatch } from "redux";
 //     )
 // }
 
-type mapDicpatch={
-    upDateaddMessage:(text:string)=>void
-    addMessage:()=>void
+type mapDicpatch = {
+    upDateaddMessage: (text: string) => void
+    addMessage: () => void
 }
 
-let mapStateToProps=(state:RootStateType):InitDialogsStateType=>{
-    return{
-        dialogs:state.dialogepage.dialogs,
-        messages:state.dialogepage.messages,
-        NewMessage:state.dialogepage.NewMessage
+type mapStateToPropsType = {
+    dialogs: DialogType[],
+    messages: MessageType[],
+    NewMessage: string,
+}
+
+type PropsTypeDialog = mapDicpatch & mapStateToPropsType
+
+let mapStateToProps = (state: RootStateType): mapStateToPropsType => {
+    return {
+        dialogs: state.dialogepage.dialogs,
+        messages: state.dialogepage.messages,
+        NewMessage: state.dialogepage.NewMessage,
     }
 }
 
 //(action: ActionValuesType) => void типизация для экшена внутри диспатча и та и та запись валидна смотреть другие компонеты
 
-let mapDicpatchtoProps=(dispatch:Dispatch):mapDicpatch=>{
-    return{
-        upDateaddMessage:(text:string)=>{dispatch(upDateNewMessageActionCreator(text))},
-        addMessage:()=>{dispatch(addMessageActionCreator())},
+let mapDicpatchtoProps = (dispatch: Dispatch): mapDicpatch => {
+    return {
+        upDateaddMessage: (text: string) => {
+            dispatch(upDateNewMessageActionCreator(text))
+        },
+        addMessage: () => {
+            dispatch(addMessageActionCreator())
+        },
     }
 }
+// let AuthRedirectComponent=(props:PropsTypeDialog)=>{//2 обертка редирект
+//     if (!props.isAuth) return <Redirect to={"/login"}/>
+//     return <Dialogs {...props}/>
+// }
 
-export const DialogsContainer=connect(mapStateToProps,mapDicpatchtoProps)(Dialogs)
+let AuthRedirectComponent = WithAuthRedirect(Dialogs)//2 обертка редирект самописный хок
+
+export const DialogsContainer = connect(mapStateToProps, mapDicpatchtoProps)(AuthRedirectComponent) // 1 обертка конект редакс
 

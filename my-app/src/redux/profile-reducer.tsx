@@ -1,6 +1,7 @@
 import React from 'react';
 import {ActionValuesType} from "./redux-store";
 import {profileApi} from "../api/api";
+import {Dispatch} from "redux";
 
 
 const ADD_POST = "ADD-POST"
@@ -93,7 +94,7 @@ export const upDateNewPostActionCreator = (text: string) => ({type: UPDATE_NEW_P
 export const setUsersProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const
 
 export const getProfileUser = (userId: string) => {
-    return (dispath: any) => {///////////////////////////////////////////////////////////////////типизация
+    return (dispath: Dispatch<ActionValuesType>) => {
         profileApi.getProfile(userId).then(data => {
             dispath(setUsersProfile(data))
         })

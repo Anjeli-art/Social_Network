@@ -1,6 +1,7 @@
 import React from 'react';
 import {ActionValuesType} from "./redux-store";
-import {profileApi, usersApi} from "../api/api";
+import {usersApi} from "../api/api";
+import {Dispatch} from "redux";
 
 
 // const ADD_POST = "ADD-POST"
@@ -66,7 +67,7 @@ export const userReducer = (state = initialstate, action: ActionValuesType): ini
         case TOGGLE_IS_FOLLOWING:
             return {
                 ...state, followngInProgress: action.togglefollow ? [...state.followngInProgress, action.id] :
-                    state.followngInProgress.filter(id => id != action.id)
+                    state.followngInProgress.filter(id => id !== action.id)
             }
         default:
             return state
@@ -86,7 +87,7 @@ export const toggleisFollowig = (togglefollow: boolean, id: number) => ({
 }) as const
 
 export const getUsers = (currentPage: number, pageSize: number) => {
-    return (dispath: any) => {///////////////////////////////////////////////////////////////////типизация
+    return (dispath: Dispatch<ActionValuesType>) => {
         dispath(toggleisFething(true))
         usersApi.getUsers(currentPage, pageSize).then(data => {
             dispath(toggleisFething(false))
@@ -97,7 +98,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
     }
 }
 export const getPageBold = (pageNumber: number, pageSize: number) => {
-    return (dispath: any) => {///////////////////////////////////////////////////////////////////типизация
+    return (dispath: Dispatch<ActionValuesType>) => {
         dispath(setCurrentPage(pageNumber))
         dispath(toggleisFething(true))
         usersApi.getUsers(pageNumber, pageSize).then(data => {
@@ -108,10 +109,10 @@ export const getPageBold = (pageNumber: number, pageSize: number) => {
     }
 }
 export const follow = (userId: number) => {
-    return (dispath: any) => {///////////////////////////////////////////////////////////////////типизация
+    return (dispath: Dispatch<ActionValuesType>) => {
         dispath(toggleisFollowig(true, userId))
         usersApi.getSubscriptionPost(userId).then(data => {
-            if (data.resultCode == 0) {
+            if (data.resultCode === 0) {
                 dispath(followsucsess(userId))
             }
             dispath(toggleisFollowig(false, userId))
@@ -120,10 +121,10 @@ export const follow = (userId: number) => {
     }
 }
 export const unfollow = (userId: number) => {
-    return (dispath: any) => {///////////////////////////////////////////////////////////////////типизация
+    return (dispath: Dispatch<ActionValuesType>) => {
         dispath(toggleisFollowig(true, userId))
         usersApi.getSubscriptionDelete(userId).then(data => {
-            if (data.resultCode == 0) {
+            if (data.resultCode === 0) {
                 dispath(unfollowsucsess(userId))
             }
             dispath(toggleisFollowig(false, userId))

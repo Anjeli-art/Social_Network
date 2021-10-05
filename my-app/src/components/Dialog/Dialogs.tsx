@@ -2,9 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogType, MessageType } from "../../redux/dialogs-reducer";
-
-
+import {DialogType, MessageType} from "../../redux/dialogs-reducer";
+import {Redirect} from "react-router-dom";
 
 
 type DialogTypeProps = {
@@ -13,7 +12,7 @@ type DialogTypeProps = {
     dialogs: DialogType[]
     upDateaddMessage: (New: string) => void
     NewMessage: string
-    // dispatch: (action: ActionValuesType) => void
+    isAuth: boolean
 
 }
 
@@ -28,26 +27,25 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
     let messagesElement = props.messages.map(m => <Message key={m.id} message={m.message}/>)
 
     let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        console.log("tttttttttt")
         const text = e.currentTarget.value
         props.upDateaddMessage(text)
     }
     let onButtonClick = () => {
-            props.addMessage()
+        props.addMessage()
     }
-    return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsItem}>
-                {dialogsElement}
-            </div>
-            <div className={s.messages}>
-                {messagesElement}
-                <div>
+        return (
+            <div className={s.dialogs}>
+                <div className={s.dialogsItem}>
+                    {dialogsElement}
+                </div>
+                <div className={s.messages}>
+                    {messagesElement}
+                    <div>
                     <textarea className={s.input} onChange={onChangeMessage}
                               value={props.NewMessage}/>
-                    <button className={s.button} onClick={onButtonClick}>+</button>
+                        <button className={s.button} onClick={onButtonClick}>+</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
 }

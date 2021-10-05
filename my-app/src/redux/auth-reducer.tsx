@@ -1,6 +1,7 @@
 import React from 'react';
 import {ActionValuesType} from "./redux-store";
 import {authApi} from "../api/api";
+import {Dispatch} from "redux";
 
 
 const SET_USER_DATA = "SET_USER_DATA"
@@ -37,7 +38,7 @@ export const setAuth = (userId: number, email: string, login: string) => ({
 }) as const
 
 export const getAuthHeader = () => {
-    return (dispath: any) => {///////////////////////////////////////////////////////////////////типизация
+    return (dispath:Dispatch<ActionValuesType>) => {
         authApi.getAuth().then(data => {
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
