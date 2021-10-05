@@ -5,6 +5,7 @@ import {RootStateType} from "../../redux/redux-store";
 import {getProfileUser, ProfileType, setUsersProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 type MapStateToProps = {
@@ -62,11 +63,16 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 //     if (!props.isAuth) return <Redirect to={"/login"}/>
 //     return <ProfileAPIComponent {...props}/>
 // }
-let AuthRedirectComponent = WithAuthRedirect(ProfileAPIComponent)//3 обертка редирект самописный хок
 
-let withRouterContainerComponent = withRouter(AuthRedirectComponent as ComponentType<RouteComponentProps>)//2 обертка виз роутер
-//с денисом нашли типизацию в случае если внутри хока класс на функциональной работало и так
-export const ProfileContainer = connect(mapStateToProps, {//1 обертка коннект редакс
-    setUsersProfile,
-    getProfileUser
-})(withRouterContainerComponent)
+
+
+// let AuthRedirectComponent = WithAuthRedirect(ProfileAPIComponent)//3 обертка редирект самописный хок
+//
+// let withRouterContainerComponent = withRouter(AuthRedirectComponent as ComponentType<RouteComponentProps>)//2 обертка виз роутер
+// //с денисом нашли типизацию в случае если внутри хока класс на функциональной работало и так
+// export const ProfileContainer = connect(mapStateToProps, {//1 обертка коннект редакс
+//     setUsersProfile,
+//     getProfileUser
+// })(withRouterContainerComponent)
+
+export const ProfileContainer=compose<ComponentType>(connect(mapStateToProps, {setUsersProfile, getProfileUser}), withRouter, WithAuthRedirect)(ProfileAPIComponent)

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component, ComponentType} from "react";
 import {
     addMessageActionCreator, DialogType,
     MessageType,
@@ -7,7 +7,7 @@ import {
 import {Dialogs} from "./Dialogs";
 import {RootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
@@ -96,7 +96,11 @@ let mapDicpatchtoProps = (dispatch: Dispatch): mapDicpatch => {
 //     return <Dialogs {...props}/>
 // }
 
-let AuthRedirectComponent = WithAuthRedirect(Dialogs)//2 обертка редирект самописный хок
 
-export const DialogsContainer = connect(mapStateToProps, mapDicpatchtoProps)(AuthRedirectComponent) // 1 обертка конект редакс
+// let AuthRedirectComponent = WithAuthRedirect(Dialogs)//2 обертка редирект самописный хок //заменим компосе
+//
+// export const DialogsContainer = connect(mapStateToProps, mapDicpatchtoProps)(AuthRedirectComponent) // 1 обертка конект редакс
+
+
+export const DialogsContainer = compose<ComponentType>(connect(mapStateToProps, mapDicpatchtoProps), WithAuthRedirect)(Dialogs)
 

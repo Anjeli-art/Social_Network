@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from 'react-redux';
 import {Preloader} from '../../common/preloader/Preloader';
 import {RootStateType} from '../../redux/redux-store';
@@ -10,7 +10,7 @@ import {
 } from '../../redux/users-reducer';
 import {Users} from './Users';
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
-
+import {compose} from "redux";
 
 
 type  MapDispatch = {
@@ -117,13 +117,20 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 
 // let AuthRedirectComponent = WithAuthRedirect(UsersAPIComponent)
 
-export const UsersContainer = WithAuthRedirect(connect(mapStateToProps, {
+// export const UsersContainer = WithAuthRedirect(connect(mapStateToProps, {
+//     follow, unfollow,
+//     // setUsers,
+//     // setTotalUsersCount,//сократили количество экшенкрейт,все диспатчатся внутри санок
+//     setCurrentPage,
+//     // toggleisFething,
+//     // toggleisFollowig,//connect внутри себя оборачивает в колл-бэк до 117 стр на этой странице
+//     getUsers,
+//     getPageBold
+// })(UsersAPIComponent))//второй объект мап диспатч название контейнера можно опустить
+
+export const UsersContainer = compose<ComponentType>(WithAuthRedirect, connect(mapStateToProps, {
     follow, unfollow,
-    // setUsers,
-    // setTotalUsersCount,//сократили количество экшенкрейт,все диспатчатся внутри санок
     setCurrentPage,
-    // toggleisFething,
-    // toggleisFollowig,//connect внутри себя оборачивает в колл-бэк до 117 стр на этой странице
     getUsers,
     getPageBold
-})(UsersAPIComponent))//второй объект мап диспатч название контейнера можно опустить
+}))(UsersAPIComponent)
