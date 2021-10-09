@@ -2,7 +2,13 @@ import React, {ComponentType} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/redux-store";
-import {getProfileUser, ProfileType, setUsersProfile} from "../../redux/profile-reducer";
+import {
+    getProfileUser,
+    getUserStatus,
+    ProfileType,
+    setUsersProfile,
+    updateUserStatus
+} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -10,10 +16,13 @@ import {compose} from "redux";
 
 type MapStateToProps = {
     profile: ProfileType
+    status:string
 }
 type  MapDispatch = {
     setUsersProfile: (profile: ProfileType) => void
     getProfileUser: (userId: string) => void
+    getUserStatus:(userId: string)=>void
+    updateUserStatus:(status: string)=>void
 }
 
 type ProfileAPIType = MapDispatch & MapStateToProps
@@ -28,9 +37,10 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = "2"
+            userId = "19622"
         }
         this.props.getProfileUser(userId)
+        this.props.getUserStatus(userId)
         // if (!userId) {
         //     userId = "2"
         // }
@@ -48,7 +58,8 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
     render() {
         // if (!this.props.isAuth) return <Redirect to={"/login"}/>
         return (
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateUserStatus}
+            />
         )
     }
 }
@@ -56,6 +67,7 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
     return {
         profile: state.profilepage.profile,
+        status:state.profilepage.status
     }
 }
 
@@ -75,4 +87,5 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 //     getProfileUser
 // })(withRouterContainerComponent)
 
-export const ProfileContainer=compose<ComponentType>(connect(mapStateToProps, {setUsersProfile, getProfileUser}), withRouter, WithAuthRedirect)(ProfileAPIComponent)
+export const ProfileContainer=compose<ComponentType>(connect(mapStateToProps,
+    {setUsersProfile, getProfileUser,getUserStatus,updateUserStatus}), withRouter, WithAuthRedirect)(ProfileAPIComponent)

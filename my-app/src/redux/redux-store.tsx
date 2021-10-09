@@ -1,5 +1,10 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
-import {addPostActionCreator, profileReducer, setUsersProfile, upDateNewPostActionCreator} from "./profile-reducer";
+import {
+    addPostActionCreator,
+    profileReducer,
+    setUsersProfile, setUserStatus,
+    upDateNewPostActionCreator
+} from "./profile-reducer";
 import {addMessageType, dialogsReducer, upDateNewMessageType} from "./dialogs-reducer";
 import {
     followsucsess,
@@ -27,6 +32,7 @@ export type ActionValuesType =
     | ReturnType<typeof setUsersProfile>
     | ReturnType<typeof setAuth>
     | ReturnType<typeof toggleisFollowig>
+    | ReturnType<typeof setUserStatus>
 
 
 let RootReducer = combineReducers({

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+
 
 
 const instatce = axios.create({
@@ -36,9 +36,17 @@ export const authApi = {
 }
 
 export const profileApi = {
-    getProfile: (id: string) => {
+    getProfile: (id: number) => {
         return instatce.get("/profile/" + id).then(response => {
             return response.data
         })
+    },
+    getStatus: (id: number) => {
+        return instatce.get("/profile/status/" + id).then(response => {
+            return response.data
+        })
+    },
+    updateStatus: (status: string) => {
+        return instatce.put("/profile/status/", {status: status})
     }
 }

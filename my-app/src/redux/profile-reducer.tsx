@@ -7,6 +7,7 @@ import {Dispatch} from "redux";
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST = "UPDATE-NEW-POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
+const SET_STATUS = "SET_STATUS"
 
 
 export type PostType = {
@@ -43,7 +44,7 @@ export type initialProfilePageType = {
     posts: PostType[]
     NewPost: string
     profile: ProfileType
-
+    status: string
 }
 
 
@@ -53,26 +54,27 @@ let initialstate: initialProfilePageType = {
         {id: 2, message: "vvv", likecount: 4}],
     NewPost: "",
     profile: {
-        "aboutMe": "я круто чувак 1001%",
+        "aboutMe": "",
         "contacts": {
-            "facebook": "facebook.com",
+            "facebook": "",
             "website": null,
-            "vk": "vk.com/dimych",
-            "twitter": "https://twitter.com/@sdf",
-            "instagram": "instagra.com/sds",
+            "vk": "",
+            "twitter": "",
+            "instagram": "",
             "youtube": null,
-            "github": "github.com",
+            "github": "",
             "mainLink": null
         },
         "lookingForAJob": true,
-        "lookingForAJobDescription": "не ищу, а дурачусь",
-        "fullName": "samurai dimych",
-        "userId": 2,
+        "lookingForAJobDescription": "",
+        "fullName": "",
+        "userId": 19622,
         "photos": {
-            "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-            "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+            "small": "",
+            "large": ""
         }
-    }
+    },
+    status: ""
 }
 
 
@@ -84,6 +86,8 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
             return {...state, NewPost: action.New}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
+        case SET_STATUS:
+            return {...state, status: action.status}
         default:
             return state
     }
@@ -92,11 +96,32 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
 export const addPostActionCreator = () => ({type: ADD_POST}) as const
 export const upDateNewPostActionCreator = (text: string) => ({type: UPDATE_NEW_POST, New: text}) as const//типизация двух видов тут и в экшнкреэйторе
 export const setUsersProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const
+export const setUserStatus = (status: string) => ({type: SET_STATUS, status}) as const
 
-export const getProfileUser = (userId: string) => {
+export const getProfileUser = (userId: number)=> {
     return (dispath: Dispatch<ActionValuesType>) => {
         profileApi.getProfile(userId).then(data => {
             dispath(setUsersProfile(data))
+        })
+
+    }
+}
+
+export const getUserStatus = (userId: number)=> {
+    return (dispath: Dispatch<ActionValuesType>) => {
+        profileApi.getStatus(userId).then(data => {
+            dispath(setUserStatus(data))
+        })
+
+    }
+}
+
+export const updateUserStatus = (status: string) => {
+    return (dispath: Dispatch<ActionValuesType>) => {
+        profileApi.updateStatus(status).then(response => {
+            if (response.data.resultCode === 0) {
+                dispath(setUserStatus(status))
+            }
         })
 
     }
