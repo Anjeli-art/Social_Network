@@ -28,7 +28,6 @@ export type UserType = {
     }
     status: string
     followed: boolean
-    // location: { city: string, country: string }
 }
 
 export type initialUserPageType = {

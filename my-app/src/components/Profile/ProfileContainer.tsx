@@ -16,13 +16,13 @@ import {compose} from "redux";
 
 type MapStateToProps = {
     profile: ProfileType
-    status:string
+    status: string
 }
 type  MapDispatch = {
     setUsersProfile: (profile: ProfileType) => void
     getProfileUser: (userId: string) => void
-    getUserStatus:(userId: string)=>void
-    updateUserStatus:(status: string)=>void
+    getUserStatus: (userId: string) => void
+    updateUserStatus: (status: string) => void
 }
 
 type ProfileAPIType = MapDispatch & MapStateToProps
@@ -55,11 +55,15 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
         // }) //создали отдельную сущность и вызов метода запаковали в объект
     }
 
+
     render() {
         // if (!this.props.isAuth) return <Redirect to={"/login"}/>
+        console.log({...this.props})
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateUserStatus}
+            <Profile {...this.props}
+                     profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateUserStatus}
             />
+
         )
     }
 }
@@ -67,7 +71,7 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
     return {
         profile: state.profilepage.profile,
-        status:state.profilepage.status
+        status: state.profilepage.status
     }
 }
 
@@ -75,7 +79,6 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 //     if (!props.isAuth) return <Redirect to={"/login"}/>
 //     return <ProfileAPIComponent {...props}/>
 // }
-
 
 
 // let AuthRedirectComponent = WithAuthRedirect(ProfileAPIComponent)//3 обертка редирект самописный хок
@@ -87,5 +90,10 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 //     getProfileUser
 // })(withRouterContainerComponent)
 
-export const ProfileContainer=compose<ComponentType>(connect(mapStateToProps,
-    {setUsersProfile, getProfileUser,getUserStatus,updateUserStatus}), withRouter, WithAuthRedirect)(ProfileAPIComponent)
+export const ProfileContainer = compose<ComponentType>(connect(mapStateToProps,
+    {
+        setUsersProfile,
+        getProfileUser,
+        getUserStatus,
+        updateUserStatus
+    }), withRouter, WithAuthRedirect)(ProfileAPIComponent)

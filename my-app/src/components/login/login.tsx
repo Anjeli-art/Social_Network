@@ -1,4 +1,5 @@
 import React from 'react';
+import {LoginForm} from "./loginForm";
 
 export const Login = () => {
     return (
@@ -6,24 +7,6 @@ export const Login = () => {
             <h1>Login</h1>
             <LoginForm/>
         </div>
-    );
-};
-
-
-const LoginForm = () => {
-    return (
-        <form action="">
-            <div>
-                <input type="text" placeholder={"login"}/></div>
-            <div>
-                <input type="password" placeholder={"password"}/></div>
-            <div>
-                <input type="checkbox"/>remember me
-            </div>
-            <div>
-                <button>submit</button>
-            </div>
-        </form>
     );
 };
 
