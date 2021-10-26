@@ -39,7 +39,8 @@ let RootReducer = combineReducers({
     profilepage: profileReducer,
     dialogepage: dialogsReducer,
     userspage: userReducer,
-    auth: authReducer
+    auth: authReducer,
+
 })
 
 export type RootStateType = ReturnType<typeof RootReducer>

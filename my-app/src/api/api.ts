@@ -32,8 +32,19 @@ export const authApi = {
         return instatce.get(`/auth/me`).then(response => {
             return response.data
         })
+    },
+    getlogin: (email:string,password:string,remmemberMe:boolean) => {
+
+        return instatce.post(`/auth/login`,{email:email,password:password,remmemberMe:remmemberMe}).then(response => {
+            console.log(response.data)
+            return response.data
+        })
     }
 }
+
+
+
+
 
 export const profileApi = {
     getProfile: (id: number) => {

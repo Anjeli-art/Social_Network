@@ -1,52 +1,83 @@
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import React from "react";
+import {RootStateType} from "../../redux/redux-store";
+import {connect} from "react-redux";
+import {getLogin} from "../../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
 
-export const LoginForm = () => {
+
+type ErrorsType = {
+    email?: string
+    password?: string
+    rememberMe?: boolean
+}
+
+type MapStateToProps = {
+    isAuth: boolean
+
+}
+type  MapDispatch = {
+
+    getLogin: (email: string, password: string, remmemberMe: boolean) => void
+}
+
+type loginFormProps = MapStateToProps & MapDispatch
+
+
+export const LoginForm = (props: loginFormProps) => {
+
+    if (props.isAuth) return <Redirect to={"/profile"}/>
+
     return (
-        // <form action="">
-        //     <div>
-        //         <input type="text" placeholder={"login"}/></div>
-        //     <div>
-        //         <input type="password" placeholder={"password"}/></div>
-        //     <div>
-        //         <input type="checkbox"/>remember me
-        //     </div>
-        //     <div>
-        //         <button>submit</button>
-        //     </div>
-        // </form>
         <Formik
-            initialValues={{email: '', password: ''}}
+            initialValues={{email: '', password: '', rememberMe: true}}
             validate={values => {
-                const errors = {email: '', password: ''};
+                const errors: ErrorsType = {};
                 if (!values.email) {
-                    errors.email = 'Required';
-                } else if (
+
+                    errors.email = 'email required';
+                }
+                if (!values.password) {
+
+                    errors.password = 'password required';
+                }
+                else if (
                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
+
                     errors.email = 'Invalid email address';
                 }
+
                 return errors;
             }}
             onSubmit={(values, {setSubmitting}) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
+                props.getLogin(values.email, values.password, values.rememberMe)
+                setSubmitting(true);
+
             }}
         >
-            {({isSubmitting}) => (
-                <Form>
+            {({
+                  isSubmitting,
+                  handleChange,
+                  values,
+                  handleSubmit,
+                  errors,
+                  touched,
+                  handleBlur
+              }) => (
+                <Form onSubmit={handleSubmit}>
                     <div>
-                        <Field type="text" name="login" placeholder={"login"}/>
-                        <ErrorMessage name="login" component="div"/>
+                        <Field type="text" name="email" value={values.email} placeholder={"login"}
+                               onCnage={handleChange}/>
+                        <ErrorMessage name="email" component="div"/>
                     </div>
                     <div>
-                        <Field type="password" name="password" placeholder={"password"}/>
+                        <Field type="password" name="password" value={values.password} placeholder={"password"}
+                               onCnage={handleChange}/>
                         <ErrorMessage name="password" component="div"/>
                     </div>
                     <div>
-                        <Field type="checkbox" name="rememberMe"/>remember me
+                        <Field type="checkbox" name="rememberMe" onCnage={handleChange}/>remember me
                     </div>
                     <div>
                         <button type="submit" disabled={isSubmitting}>
@@ -58,3 +89,15 @@ export const LoginForm = () => {
         </Formik>
     );
 };
+
+
+const mapStateToProps = (state: RootStateType): MapStateToProps => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+
+export const LoginFormContainer = connect(mapStateToProps, {
+    getLogin
+})(LoginForm)

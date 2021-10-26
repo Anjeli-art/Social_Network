@@ -1,7 +1,8 @@
 import React from 'react';
-import {ActionValuesType} from "./redux-store";
+import {ActionValuesType, RootStateType} from "./redux-store";
 import {authApi} from "../api/api";
 import {Dispatch} from "redux";
+import {ThunkDispatch} from "redux-thunk";
 
 
 const SET_USER_DATA = "SET_USER_DATA"
@@ -37,14 +38,27 @@ export const setAuth = (userId: number, email: string, login: string) => ({
     data: {userId, email, login}
 }) as const
 
+
 export const getAuthHeader = () => {
-    return (dispath:Dispatch<ActionValuesType>) => {
+    return (dispatch: Dispatch<ActionValuesType>) => {
         authApi.getAuth().then(data => {
+            console.log(data.resultCode)
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
-                dispath(setAuth(id, email, login))
+                dispatch(setAuth(id, email, login))
             }
         })
 
+    }
+}
+
+export const getLogin = (email: string, password: string, remmemberMe: boolean) => {
+    return (dispatch: ThunkDispatch<RootStateType, undefined, ActionValuesType>) => {
+        authApi.getlogin(email, password, remmemberMe).then(data => {
+            console.log(data.resultCode)
+            if (data.resultCode === 0) {
+                dispatch(getAuthHeader())
+            }
+        })
     }
 }
