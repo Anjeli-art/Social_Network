@@ -1,4 +1,4 @@
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Formik} from "formik";
 import React from "react";
 import {RootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
@@ -18,7 +18,6 @@ type MapStateToProps = {
 
 }
 type  MapDispatch = {
-
     getLogin: (email: string, password: string, remmemberMe: boolean) => void
 }
 
@@ -41,8 +40,7 @@ export const LoginForm = (props: loginFormProps) => {
                 if (!values.password) {
 
                     errors.password = 'password required';
-                }
-                else if (
+                } else if (
                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
 
@@ -55,8 +53,7 @@ export const LoginForm = (props: loginFormProps) => {
                 props.getLogin(values.email, values.password, values.rememberMe)
                 setSubmitting(true);
 
-            }}
-        >
+            }}>
             {({
                   isSubmitting,
                   handleChange,
@@ -66,15 +63,15 @@ export const LoginForm = (props: loginFormProps) => {
                   touched,
                   handleBlur
               }) => (
-                <Form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div>
                         <Field type="text" name="email" value={values.email} placeholder={"login"}
-                               onCnage={handleChange} />
+                               onCnage={handleChange}/>
                         <ErrorMessage name="email" component="div" className={s.errortext}/>
                     </div>
                     <div>
                         <Field type="password" name="password" value={values.password} placeholder={"password"}
-                               onCnage={handleChange} />
+                               onCnage={handleChange}/>
                         <ErrorMessage name="password" component="div" className={s.errortext}/>
                     </div>
                     <div>
@@ -85,7 +82,7 @@ export const LoginForm = (props: loginFormProps) => {
                             Submit
                         </button>
                     </div>
-                </Form>
+                </form>
             )}
         </Formik>
     );

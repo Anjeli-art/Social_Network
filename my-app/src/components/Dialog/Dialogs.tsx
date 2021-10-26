@@ -3,7 +3,7 @@ import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogType, MessageType} from "../../redux/dialogs-reducer";
-
+import {useFormik} from "formik";
 
 
 type DialogTypeProps = {
@@ -30,19 +30,49 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
     let onButtonClick = () => {
         props.addMessage()
     }
-        return (
-            <div className={s.dialogs}>
-                <div className={s.dialogsItem}>
-                    {dialogsElement}
-                </div>
-                <div className={s.messages}>
-                    {messagesElement}
-                    <div>
-                    <textarea className={s.input} onChange={onChangeMessage}
-                              value={props.NewMessage}/>
-                        <button className={s.button} onClick={onButtonClick}>+</button>
-                    </div>
-                </div>
+    return (
+        <div className={s.dialogs}>
+            <div className={s.dialogsItem}>
+                {dialogsElement}
             </div>
-        )
+            <div className={s.messages}>
+                {messagesElement}
+                <DilogForm/>
+            </div>
+            {/*<form>*/}
+            {/*    <div>*/}
+            {/*    <textarea  onChange={onChangeMessage}*/}
+            {/*              value={props.NewMessage}/>*/}
+            {/*        <button  onClick={onButtonClick}>+</button>*/}
+            {/*    </div>*/}
+            {/*</form>*/}
+        </div>
+    )
+}
+
+const DilogForm = () => {
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    });
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <label htmlFor="email"></label>
+            <input
+                className={s.input}
+                id="email"
+                name="email"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+            />
+            <button className={s.button} type="submit">Отправить</button>
+        </form>
+
+    )
 }

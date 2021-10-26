@@ -42,7 +42,7 @@ export const setAuth = (userId: number, email: string, login: string) => ({
 export const getAuthHeader = () => {
     return (dispatch: Dispatch<ActionValuesType>) => {
         authApi.getAuth().then(data => {
-            console.log(data.resultCode)
+            debugger
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
                 dispatch(setAuth(id, email, login))
@@ -55,7 +55,6 @@ export const getAuthHeader = () => {
 export const getLogin = (email: string, password: string, remmemberMe: boolean) => {
     return (dispatch: ThunkDispatch<RootStateType, undefined, ActionValuesType>) => {
         authApi.getlogin(email, password, remmemberMe).then(data => {
-            console.log(data.resultCode)
             if (data.resultCode === 0) {
                 dispatch(getAuthHeader())
             }
