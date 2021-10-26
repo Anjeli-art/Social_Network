@@ -54,22 +54,23 @@ const DilogForm = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
+            NewMessage: '',
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+
+            alert(JSON.stringify(values.NewMessage));
         },
     });
     return (
         <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="email"></label>
+            {/*<label htmlFor="email"></label>*/}
             <input
                 className={s.input}
-                id="email"
-                name="email"
+                id="NewMessage"
+                name="NewMessage"
                 type="text"
                 onChange={formik.handleChange}
-                value={formik.values.email}
+                value={formik.values.NewMessage}
             />
             <button className={s.button} type="submit">Отправить</button>
         </form>

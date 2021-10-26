@@ -42,22 +42,23 @@ export const MyPost: React.FC<propsTypeMyPost> = (props) => {
 const MyPostForm = () => {
     const formik = useFormik({
         initialValues: {
-            email: '',
+            NewPost: '',
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+
+            alert(JSON.stringify(values.NewPost));
         },
     });
     return (
         <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="email"></label>
+            {/*<label htmlFor="email"></label>*/}
             <input
                 className={s.input}
-                id="email"
-                name="email"
+                id="NewPost"
+                name="NewPost"
                 type="text"
                 onChange={formik.handleChange}
-                value={formik.values.email}
+                value={formik.values.NewPost}
             />
 
             <button type="submit" className={s.button}>Отправить</button>
