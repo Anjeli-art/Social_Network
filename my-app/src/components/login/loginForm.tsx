@@ -4,6 +4,7 @@ import {RootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {getLogin} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
+import s from "./login.module.css"
 
 
 type ErrorsType = {
@@ -68,13 +69,13 @@ export const LoginForm = (props: loginFormProps) => {
                 <Form onSubmit={handleSubmit}>
                     <div>
                         <Field type="text" name="email" value={values.email} placeholder={"login"}
-                               onCnage={handleChange}/>
-                        <ErrorMessage name="email" component="div"/>
+                               onCnage={handleChange} />
+                        <ErrorMessage name="email" component="div" className={s.errortext}/>
                     </div>
                     <div>
                         <Field type="password" name="password" value={values.password} placeholder={"password"}
-                               onCnage={handleChange}/>
-                        <ErrorMessage name="password" component="div"/>
+                               onCnage={handleChange} />
+                        <ErrorMessage name="password" component="div" className={s.errortext}/>
                     </div>
                     <div>
                         <Field type="checkbox" name="rememberMe" onCnage={handleChange}/>remember me

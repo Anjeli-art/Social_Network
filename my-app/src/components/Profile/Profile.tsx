@@ -18,7 +18,6 @@ export const Profile: React.FC<ProfileTypeProps> = (props) => {
         <div>
             <ProfileInfo
                 {...props}
-                // profile={props.profile} status={props.status} updateStatus={props.updateStatus}
             />
             <MyPostContainer/>
         </div>

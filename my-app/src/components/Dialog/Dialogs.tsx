@@ -3,7 +3,7 @@ import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogType, MessageType} from "../../redux/dialogs-reducer";
-import {Redirect} from "react-router-dom";
+
 
 
 type DialogTypeProps = {
@@ -15,9 +15,6 @@ type DialogTypeProps = {
     isAuth: boolean
 
 }
-
-
-//type PropsType={ dialogs:Array<DialogItemTypeProps>,messages:Array<messageType> }
 
 //<DialogType & MymessageType>аналог верней записи сработает если мы склеиваем два одинаковых обЪекта
 

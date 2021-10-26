@@ -5,8 +5,7 @@ import userphoto from "../../assets/images/images.jpg"
 import {NavLink} from 'react-router-dom';
 
 
-
-type propsType = {
+type PropsType = {
     users: Array<UserType>
     follow: (userId: number) => void
     unfollow: (userId: number) => void
@@ -14,18 +13,16 @@ type propsType = {
     totalUsersCount: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
-    // toggleisFollowig: (togglefollow: boolean,id:number) => void
     followngInProgress: Array<number>
 }
 
-export const Users: React.FC<propsType> = (props) => {
+export const Users: React.FC<PropsType> = (props) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    console.log(props.totalUsersCount)
     return (
         <div>
             <div>
@@ -48,23 +45,8 @@ export const Users: React.FC<propsType> = (props) => {
                         {el.followed ?
                             <button disabled={props.followngInProgress.some(id => id === el.id)} onClick={() => {
                                 props.unfollow(el.id)
-                                // props.toggleisFollowig(true,el.id)
-                                // usersApi.getSubscriptionDelete(el.id).then(data => {
-                                //     if (data.resultCode == 0) {
-                                //         props.unfollow(el.id)
-                                //     }
-                                //     props.toggleisFollowig(false,el.id)
-                                // })
                             }}>unfollow</button> : <button disabled={props.followngInProgress.some(id => id === el.id)} onClick={() => {
                                props.follow(el.id)
-                                // props.toggleisFollowig(true,el.id)
-                                // usersApi.getSubscriptionPost(el.id).then(data => {
-                                //         if (data.resultCode == 0) {
-                                //             props.follow(el.id)
-                                //         }
-                                //         props.toggleisFollowig(false,el.id)
-                                //     }
-                                // )
                             }}>follow</button>}
                     </div>
                 </div>
