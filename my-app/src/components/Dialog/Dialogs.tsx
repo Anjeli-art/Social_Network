@@ -7,11 +7,11 @@ import {useFormik} from "formik";
 
 
 type DialogTypeProps = {
-    addMessage: () => void
+    addMessage: (NewMessage: string) => void
     messages: MessageType[]
     dialogs: DialogType[]
-    upDateaddMessage: (New: string) => void
-    NewMessage: string
+    // upDateaddMessage: (New: string) => void
+    // NewMessage: string
     isAuth: boolean
 
 }
@@ -23,12 +23,12 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
     let dialogsElement = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messagesElement = props.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-    let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const text = e.currentTarget.value
-        props.upDateaddMessage(text)
-    }
-    let onButtonClick = () => {
-        props.addMessage()
+    // let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    //     const text = e.currentTarget.value
+    //     props.upDateaddMessage(text)
+    // }
+    let onButtonClick = (NewMessage: string) => {
+        props.addMessage(NewMessage)
     }
     return (
         <div className={s.dialogs}>
@@ -37,7 +37,7 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
             </div>
             <div className={s.messages}>
                 {messagesElement}
-                <DilogForm/>
+                <DilogForm onButtonClick={onButtonClick}/>
             </div>
             {/*<form>*/}
             {/*    <div>*/}
@@ -49,16 +49,18 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
         </div>
     )
 }
+type DilogFormProps = {
+    onButtonClick: (NewMessage: string) => void
+}
 
-const DilogForm = () => {
+const DilogForm = (props: DilogFormProps) => {
 
     const formik = useFormik({
         initialValues: {
             NewMessage: '',
         },
         onSubmit: values => {
-
-            alert(JSON.stringify(values.NewMessage));
+            props.onButtonClick(values.NewMessage)
         },
     });
     return (

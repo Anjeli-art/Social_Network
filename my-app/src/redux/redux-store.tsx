@@ -3,9 +3,8 @@ import {
     addPostActionCreator,
     profileReducer,
     setUsersProfile, setUserStatus,
-    upDateNewPostActionCreator
 } from "./profile-reducer";
-import {addMessageType, dialogsReducer, upDateNewMessageType} from "./dialogs-reducer";
+import {addMessageType, dialogsReducer} from "./dialogs-reducer";
 import {
     followsucsess,
     setCurrentPage,
@@ -20,9 +19,9 @@ import thunkMiddleware from "redux-thunk"
 
 export type ActionValuesType =
     ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof upDateNewPostActionCreator>
+    // | ReturnType<typeof upDateNewPostActionCreator>
     | addMessageType
-    | upDateNewMessageType
+    // | upDateNewMessageType
     | ReturnType<typeof followsucsess>
     | ReturnType<typeof unfollowsucsess>
     | ReturnType<typeof setUsers>

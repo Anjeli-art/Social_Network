@@ -2,7 +2,6 @@ import React, {Component, ComponentType} from "react";
 import {
     addMessageActionCreator, DialogType,
     MessageType,
-    upDateNewMessageActionCreator
 } from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {RootStateType} from "../../redux/redux-store";
@@ -59,14 +58,14 @@ import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 // }
 
 type mapDicpatch = {
-    upDateaddMessage: (text: string) => void
-    addMessage: () => void
+    // upDateaddMessage: (text: string) => void
+    addMessage: (NewMessage:string) => void
 }
 
 type mapStateToPropsType = {
     dialogs: DialogType[],
     messages: MessageType[],
-    NewMessage: string,
+    // NewMessage: string,
 }
 
 type PropsTypeDialog = mapDicpatch & mapStateToPropsType
@@ -74,8 +73,8 @@ type PropsTypeDialog = mapDicpatch & mapStateToPropsType
 let mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
         dialogs: state.dialogepage.dialogs,
-        messages: state.dialogepage.messages,
-        NewMessage: state.dialogepage.NewMessage,
+        messages: state.dialogepage.messages
+        // NewMessage: state.dialogepage.NewMessage,
     }
 }
 
@@ -83,11 +82,11 @@ let mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 
 let mapDicpatchtoProps = (dispatch: Dispatch): mapDicpatch => {
     return {
-        upDateaddMessage: (text: string) => {
-            dispatch(upDateNewMessageActionCreator(text))
-        },
-        addMessage: () => {
-            dispatch(addMessageActionCreator())
+        // upDateaddMessage: (text: string) => {
+        //     dispatch(upDateNewMessageActionCreator(text))
+        // },
+        addMessage: (NewMessage:string) => {
+            dispatch(addMessageActionCreator(NewMessage))
         },
     }
 }

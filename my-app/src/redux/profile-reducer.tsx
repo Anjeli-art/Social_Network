@@ -5,7 +5,7 @@ import {Dispatch} from "redux";
 
 
 const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST = "UPDATE-NEW-POST"
+// const UPDATE_NEW_POST = "UPDATE-NEW-POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 
@@ -42,7 +42,7 @@ export type ProfileType = {
 }
 export type initialProfilePageType = {
     posts: PostType[]
-    NewPost: string
+    // NewPost: string
     profile: ProfileType
     status: string
 }
@@ -52,7 +52,7 @@ let initialstate: initialProfilePageType = {
     posts: [
         {id: 1, message: "vvv", likecount: 3},
         {id: 2, message: "vvv", likecount: 4}],
-    NewPost: "",
+    // NewPost: "",
     profile: {
         "aboutMe": "",
         "contacts": {
@@ -81,9 +81,9 @@ let initialstate: initialProfilePageType = {
 export const profileReducer = (state = initialstate, action: ActionValuesType): initialProfilePageType => {
     switch (action.type) {
         case  ADD_POST:
-            return {...state, posts: [...state.posts, {id: 5, message: state.NewPost, likecount: 2}], NewPost: ""}
-        case UPDATE_NEW_POST:
-            return {...state, NewPost: action.New}
+            return {...state, posts: [...state.posts, {id: 5, message: action.NewPost, likecount: 2}], }
+        // case UPDATE_NEW_POST:
+        //     return {...state, NewPost: action.New}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_STATUS:
@@ -93,8 +93,8 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST}) as const
-export const upDateNewPostActionCreator = (text: string) => ({type: UPDATE_NEW_POST, New: text}) as const//типизация двух видов тут и в экшнкреэйторе
+export const addPostActionCreator = (NewPost:string) => ({type: ADD_POST,NewPost}) as const
+// export const upDateNewPostActionCreator = (text: string) => ({type: UPDATE_NEW_POST, New: text}) as const//типизация двух видов тут и в экшнкреэйторе
 export const setUsersProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const
 export const setUserStatus = (status: string) => ({type: SET_STATUS, status}) as const
 

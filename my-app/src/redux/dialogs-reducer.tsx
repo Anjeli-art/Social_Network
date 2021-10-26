@@ -2,15 +2,16 @@ import React from 'react';
 import {ActionValuesType} from "./redux-store";
 
 const ADD_MESSGE = "ADD-MESSGE"
-const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE"
+// const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE"
 
 export type addMessageType = {
     type: "ADD-MESSGE"
+    NewMessage:string
 }//типизация двух видов тут и в экшнкреэйторе
-export type upDateNewMessageType = {
-    type: "UPDATE-NEW-MESSAGE"
-    New: string
-}
+// export type upDateNewMessageType = {
+//     type: "UPDATE-NEW-MESSAGE"
+//     New: string
+// }
 
 
 export type MessageType = {
@@ -24,7 +25,7 @@ export type DialogType = {
 
 export type InitDialogsStateType = {
     messages: MessageType[]
-    NewMessage: string
+    // NewMessage: string
     dialogs: DialogType[]
 }
 
@@ -34,7 +35,6 @@ let initialstate: InitDialogsStateType = {
         {id: 2, message: "How are you?"},
         {id: 3, message: "Hi"},
         {id: 4, message: "Yo"},],
-    NewMessage: "",
     dialogs: [
         {id: 1, name: "Dima"},
         {id: 2, name: "Sasha"},
@@ -48,18 +48,18 @@ let initialstate: InitDialogsStateType = {
 export const dialogsReducer = (state = initialstate, action: ActionValuesType): InitDialogsStateType => {
     switch (action.type) {
         case ADD_MESSGE:
-            return {...state, messages: [...state.messages, {id: 5, message: state.NewMessage}], NewMessage: ""}
+            return {...state,messages: [...state.messages, {id: 5, message: action.NewMessage}]}
 
-        case UPDATE_NEW_MESSAGE:
-            return {...state, NewMessage: action.New}
+        // case UPDATE_NEW_MESSAGE:
+        //     return {...state, NewMessage: action.New}
 
         default:
             return state
     }
 }
 
-export const addMessageActionCreator = (): addMessageType => ({type: ADD_MESSGE})
-export const upDateNewMessageActionCreator = (text: string): upDateNewMessageType => ({
-    type: UPDATE_NEW_MESSAGE,
-    New: text
-})//типизация двух видов тут и в экшнкреэйторе
+export const addMessageActionCreator = (NewMessage:string): addMessageType => ({type: ADD_MESSGE,NewMessage})
+// export const upDateNewMessageActionCreator = (text: string): upDateNewMessageType => ({
+//     type: UPDATE_NEW_MESSAGE,
+//     New: text
+// })//типизация двух видов тут и в экшнкреэйторе

@@ -1,6 +1,7 @@
 import React from 'react';
-import {addPostActionCreator, upDateNewPostActionCreator} from "./profile-reducer";
-import {addMessageType, upDateNewMessageType} from "./dialogs-reducer";
+
+import {addPostActionCreator} from "./profile-reducer";
+import {addMessageType} from "./dialogs-reducer";
 
 // export type ActionValuesType =
 //     ReturnType<typeof addPostActionCreator>
