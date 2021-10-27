@@ -23,10 +23,7 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
     let dialogsElement = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messagesElement = props.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-    // let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     const text = e.currentTarget.value
-    //     props.upDateaddMessage(text)
-    // }
+
     let onButtonClick = (NewMessage: string) => {
         props.addMessage(NewMessage)
     }
@@ -39,25 +36,27 @@ export const Dialogs: React.FC<DialogTypeProps> = (props) => {
                 {messagesElement}
                 <DilogForm onButtonClick={onButtonClick}/>
             </div>
-            {/*<form>*/}
-            {/*    <div>*/}
-            {/*    <textarea  onChange={onChangeMessage}*/}
-            {/*              value={props.NewMessage}/>*/}
-            {/*        <button  onClick={onButtonClick}>+</button>*/}
-            {/*    </div>*/}
-            {/*</form>*/}
         </div>
     )
 }
 type DilogFormProps = {
     onButtonClick: (NewMessage: string) => void
 }
-
+type MyPostFormErrors = {
+    NewMessage?: string
+}
 const DilogForm = (props: DilogFormProps) => {
 
     const formik = useFormik({
         initialValues: {
             NewMessage: '',
+        },
+        validate: (values) => {
+            const errors: MyPostFormErrors = {};
+            if (values.NewMessage.length > 20) {
+                errors.NewMessage = "max length 20"
+            }
+            return errors
         },
         onSubmit: values => {
             props.onButtonClick(values.NewMessage)
@@ -66,14 +65,15 @@ const DilogForm = (props: DilogFormProps) => {
     return (
         <form onSubmit={formik.handleSubmit}>
             <input
-                className={s.input}
+                className={formik.errors.NewMessage ? s.inputError : s.input}
                 id="NewMessage"
                 name="NewMessage"
                 type="text"
                 onChange={formik.handleChange}
                 value={formik.values.NewMessage}
             />
-            <button className={s.button} type="submit">Отправить</button>
+            <button className={s.button} type="submit" disabled={!!formik.errors.NewMessage}>Отправить</button>
+            {formik.errors && <span className={s.spanError}>{formik.errors.NewMessage}</span>}
         </form>
 
     )
