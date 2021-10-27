@@ -3,6 +3,10 @@
     border: solid 4px #68c5e2;
     margin-top: 10px;
     grid-area: h;
+    /*text-align: justify;*/
+    /*letter-spacing: 1px;*/
+    /*height: 8em;*/
+    /*padding: 2em 10%;*/
 }
 
 .header img {
@@ -12,9 +16,7 @@
 }
 
 .loginBlock {
-    /*float: right;*/
-    position:absolute;
-
+    float: right;
 }
 
 .loginBlock a {

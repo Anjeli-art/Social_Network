@@ -5,11 +5,6 @@ import { DialogType } from "../../../redux/dialogs-reducer";
 
 
 
-
-
-
-
-
 export const DialogItem:React.FC<DialogType>=(props)=>{
     let path="/dialogs/"+props.id
     return(

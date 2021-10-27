@@ -10,11 +10,6 @@ type PropsType = {
 }
 
 export const Header: React.FC<PropsType> = (props) => {
-    console.log("11")
-
-    function onLogout() {
-        //dispatch(props.getLogout())
-    }
 
     return (
         <header className={s.header}>

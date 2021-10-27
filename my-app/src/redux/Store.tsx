@@ -3,12 +3,6 @@ import React from 'react';
 import {addPostActionCreator} from "./profile-reducer";
 import {addMessageType} from "./dialogs-reducer";
 
-// export type ActionValuesType =
-//     ReturnType<typeof addPostActionCreator>
-//     | ReturnType<typeof upDateNewPostActionCreator>
-//     | addMessageType
-//     | upDateNewMessageType
-
 // export type StoreType = {
 //     _state: StateType
 //     getState: () => StateType
@@ -69,37 +63,6 @@ import {addMessageType} from "./dialogs-reducer";
 
 // @ts-ignore
 window.store = store
-
-// export type PostType = {
-//     id: number
-//     message: string | undefined
-//     likecount: number
-// }
-
-// export type MessageType = {
-//     id: number
-//     message: string | undefined
-// }
-// export type DialogType = {
-//     id: number
-//     name: string
-// }
-
-// export type ProfilepageType = {
-//     posts: PostType[]
-//     NewPost: string
-// }
-
-// export type StateType = {
-//     profilepage: ProfilepageType
-//     dialogepage: DialogepageepageType
-// }
-//
-// export type DialogepageepageType = {
-//     messages: MessageType[]
-//     NewMessage: string
-//     dialogs: DialogType[]
-// }
 
 
 export type PostTypeMap = {

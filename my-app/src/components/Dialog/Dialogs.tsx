@@ -10,8 +10,6 @@ type DialogTypeProps = {
     addMessage: (NewMessage: string) => void
     messages: MessageType[]
     dialogs: DialogType[]
-    // upDateaddMessage: (New: string) => void
-    // NewMessage: string
     isAuth: boolean
 
 }
