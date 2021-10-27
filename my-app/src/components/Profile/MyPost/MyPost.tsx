@@ -9,14 +9,14 @@ export type TypeMyPost = {
     posts: PostType[]
     // NewPost: string
     // updateNewPostText: (text: string) => void
-    addPost: (NewPost:string) => void
+    addPost: (NewPost: string) => void
 }
 export const MyPost: React.FC<TypeMyPost> = (props) => {
 
     let PostElement = props.posts.map(p => <Post key={p.id} message={p.message} likecount={p.likecount}/>)
     // let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    let onAddPost = (NewPost:string) => {
+    let onAddPost = (NewPost: string) => {
         props.addPost(NewPost);
     }
     // let onPostText = () => {
@@ -39,34 +39,43 @@ export const MyPost: React.FC<TypeMyPost> = (props) => {
         </div>
     )
 }
-type MyPostFormProps={
-    onAddPost:(NewPost:string)=>void
+type MyPostFormProps = {
+    onAddPost: (NewPost: string) => void
 }
 
-
-const MyPostForm = (props:MyPostFormProps) => {
+// type MyPostFormErrors = {
+//     NewPost?: string
+// }
+const MyPostForm = (props: MyPostFormProps) => {
     const formik = useFormik({
         initialValues: {
             NewPost: '',
         },
-        onSubmit: values => {
-            props.onAddPost(values.NewPost)
-        },
-    });
-    return (
-        <form onSubmit={formik.handleSubmit}>
-            {/*<label htmlFor="email"></label>*/}
-            <input
-                className={s.input}
-                id="NewPost"
-                name="NewPost"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.NewPost}
-            />
+        // validate: (values) => {
+        //     const errors: MyPostFormErrors = {};
+        //     if (values.NewPost.length > 30) {
+        //         errors.NewPost = "max length 30"
+        //     }
+        // },
 
-            <button type="submit" className={s.button}>Отправить</button>
-        </form>
-    )
+        onSubmit: (values, {setSubmitting}) => {
+            props.onAddPost(values.NewPost)
+            setSubmitting(true)
+        },
+
+    });
+    console.dir(formik)
+    return <form onSubmit={formik.handleSubmit}>
+        <input
+            className={s.input}
+            id="NewPost"
+            name="NewPost"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.NewPost}
+        />
+
+        <button type="submit" className={s.button}>Отправить</button>
+    </form>
 
 }

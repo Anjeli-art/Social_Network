@@ -65,7 +65,6 @@ const DilogForm = (props: DilogFormProps) => {
     });
     return (
         <form onSubmit={formik.handleSubmit}>
-            {/*<label htmlFor="email"></label>*/}
             <input
                 className={s.input}
                 id="NewMessage"

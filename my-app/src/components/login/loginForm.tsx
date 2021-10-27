@@ -7,7 +7,7 @@ import {Redirect} from "react-router-dom";
 import s from "./login.module.css"
 
 
-type ErrorsType = {
+type ErrorsType ={
     email?: string
     password?: string
     rememberMe?: boolean
@@ -46,7 +46,7 @@ export const LoginForm = (props: loginFormProps) => {
 
                     errors.email = 'Invalid email address';
                 }
-
+                console.log(errors)
                 return errors;
             }}
             onSubmit={(values, {setSubmitting}) => {
@@ -61,17 +61,16 @@ export const LoginForm = (props: loginFormProps) => {
                   handleSubmit,
                   errors,
                   touched,
-                  handleBlur
               }) => (
                 <form onSubmit={handleSubmit}>
                     <div>
                         <Field type="text" name="email" value={values.email} placeholder={"login"}
-                               onCnage={handleChange}/>
+                               onCnage={handleChange} className={errors.email && touched.email  && s.errorinput}/>
                         <ErrorMessage name="email" component="div" className={s.errortext}/>
                     </div>
                     <div>
                         <Field type="password" name="password" value={values.password} placeholder={"password"}
-                               onCnage={handleChange}/>
+                               onCnage={handleChange} className={errors.password && touched.password  && s.errorinput}/>
                         <ErrorMessage name="password" component="div" className={s.errortext}/>
                     </div>
                     <div>

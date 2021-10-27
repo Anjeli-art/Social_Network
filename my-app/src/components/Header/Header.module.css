@@ -12,7 +12,8 @@
 }
 
 .loginBlock {
-    float: right;
+    /*float: right;*/
+    position:absolute;
 
 }
 

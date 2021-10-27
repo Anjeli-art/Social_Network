@@ -1,4 +1,7 @@
+.errorinput{
+    border:darkred 2px solid;
 
+}
 
 .errortext{
     color:darkred;
