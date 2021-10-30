@@ -15,6 +15,7 @@ type ErrorsType ={
 
 type MapStateToProps = {
     isAuth: boolean
+    errorMessage:null|string
 
 }
 type  MapDispatch = {
@@ -49,9 +50,8 @@ export const LoginForm = (props: loginFormProps) => {
                 console.log(errors)
                 return errors;
             }}
-            onSubmit={(values, {setSubmitting}) => {
+            onSubmit={(values) => {
                 props.getLogin(values.email, values.password, values.rememberMe)
-                setSubmitting(true);
 
             }}>
             {({
@@ -76,8 +76,9 @@ export const LoginForm = (props: loginFormProps) => {
                     <div>
                         <Field type="checkbox" name="rememberMe" onCnage={handleChange}/>remember me
                     </div>
+                    <div className={s.errortext}>{props.errorMessage}</div>
                     <div>
-                        <button type="submit" disabled={isSubmitting}>
+                        <button type="submit">
                             Submit
                         </button>
                     </div>
@@ -90,7 +91,8 @@ export const LoginForm = (props: loginFormProps) => {
 
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        errorMessage: state.auth.errorMessage
     }
 }
 

@@ -14,7 +14,7 @@ import {
     unfollowsucsess,
     userReducer
 } from "./users-reducer";
-import {authReducer, setAuth} from "./auth-reducer";
+import {authReducer, setAuth, setErrorMessage} from "./auth-reducer";
 import thunkMiddleware from "redux-thunk"
 
 export type ActionValuesType =
@@ -32,6 +32,7 @@ export type ActionValuesType =
     | ReturnType<typeof setAuth>
     | ReturnType<typeof toggleisFollowig>
     | ReturnType<typeof setUserStatus>
+    | ReturnType<typeof setErrorMessage>
 
 
 let RootReducer = combineReducers({
@@ -42,6 +43,10 @@ let RootReducer = combineReducers({
 
 })
 
+
 export type RootStateType = ReturnType<typeof RootReducer>
 
 export let store: Store<RootStateType, ActionValuesType> = createStore(RootReducer, applyMiddleware(thunkMiddleware))
+
+//@ts-ignore
+window.store = store
