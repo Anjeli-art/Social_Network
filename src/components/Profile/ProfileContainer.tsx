@@ -54,10 +54,6 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
         //     this.props.setUsersProfile(data)
         // })
 
-
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
-        //     this.props.setUsersProfile(response.data)
-        // }) //создали отдельную сущность и вызов метода запаковали в объект
     }
 
 
