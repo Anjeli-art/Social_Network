@@ -47,7 +47,7 @@ export const LoginForm = (props: loginFormProps) => {
 
                     errors.email = 'Invalid email address';
                 }
-                console.log(errors)
+
                 return errors;
             }}
             onSubmit={(values) => {
