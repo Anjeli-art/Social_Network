@@ -49,9 +49,8 @@ export const setErrorMessage = (errorMessage:string) => {
     } as const
 }
 
-export const getAuthHeader = () => {
-    return (dispatch: Dispatch<ActionValuesType>) => {
-        authApi.getAuth().then(data => {
+export const getAuthHeader = () => (dispatch: ThunkDispatch<RootStateType, undefined, ActionValuesType>) => {
+       return authApi.getAuth().then(data => {
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
                 dispatch(setAuth(id, email, login,true))
@@ -59,7 +58,7 @@ export const getAuthHeader = () => {
         })
 
     }
-}
+
 
 export const getLogin = (email: string, password: string, remmemberMe: boolean) => {
     return (dispatch: ThunkDispatch<RootStateType, undefined, ActionValuesType>) => {

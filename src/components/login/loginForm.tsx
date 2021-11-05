@@ -7,7 +7,7 @@ import {Redirect} from "react-router-dom";
 import s from "./login.module.css"
 
 
-type ErrorsType ={
+type ErrorsType = {
     email?: string
     password?: string
     rememberMe?: boolean
@@ -15,7 +15,7 @@ type ErrorsType ={
 
 type MapStateToProps = {
     isAuth: boolean
-    errorMessage:null|string
+    errorMessage: null | string
 
 }
 type  MapDispatch = {
@@ -52,7 +52,7 @@ export const LoginForm = (props: loginFormProps) => {
             }}
             onSubmit={(values) => {
                 props.getLogin(values.email, values.password, values.rememberMe)
-
+                console.log(Formik)
             }}>
             {({
                   isSubmitting,
@@ -62,15 +62,20 @@ export const LoginForm = (props: loginFormProps) => {
                   errors,
                   touched,
               }) => (
+
                 <form onSubmit={handleSubmit}>
                     <div>
                         <Field type="text" name="email" value={values.email} placeholder={"login"}
-                               onCnage={handleChange} className={errors.email && touched.email  && s.errorinput}/>
+                               onCnage={handleChange}
+                            // className={errors.email && touched.email  && s.errorinput}
+                        />
                         <ErrorMessage name="email" component="div" className={s.errortext}/>
                     </div>
                     <div>
                         <Field type="password" name="password" value={values.password} placeholder={"password"}
-                               onCnage={handleChange} className={errors.password && touched.password  && s.errorinput}/>
+                               onCnage={handleChange}
+                               className={errors.password && touched.password && s.errorinput}
+                        />
                         <ErrorMessage name="password" component="div" className={s.errortext}/>
                     </div>
                     <div>

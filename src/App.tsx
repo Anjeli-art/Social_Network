@@ -12,16 +12,21 @@ import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {Login} from "./components/login/login";
 import {Friends} from "./components/Friends/Friends";
 import {connect} from "react-redux";
-import {getAuthHeader} from "./redux/auth-reducer";
+
 import {compose} from "redux";
+import {initialize} from "./redux/app-reducer";
+import {RootStateType} from "./redux/redux-store";
 
 type  MapDispatch = {
-    getAuthHeader:() =>void
+    initialize:()=>void
+}
+type MapStateToProps={
+    
 }
 
 export class App extends React.Component<MapDispatch> {
     componentDidMount() {
-        this.props.getAuthHeader()
+        this.props.initialize()
     }
     render() {
 
@@ -46,8 +51,13 @@ export class App extends React.Component<MapDispatch> {
         );
     }
 }
-
-export const AppContainer =compose<ComponentType>(withRouter,connect(null, {getAuthHeader
+const mapStateToProps = (state: RootStateType): MapStateToProps => {
+    return {
+        isAuth: state.auth.isAuth,
+        login: state.auth.login
+    }
+}
+export const AppContainer =compose<ComponentType>(withRouter,connect(mapStateToProps, {initialize
 
 }))(App)
 

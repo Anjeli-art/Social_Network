@@ -16,12 +16,11 @@ import {
 } from "./users-reducer";
 import {authReducer, setAuth, setErrorMessage} from "./auth-reducer";
 import thunkMiddleware from "redux-thunk"
+import {appReducer, initializedSucces} from "./app-reducer";
 
 export type ActionValuesType =
     ReturnType<typeof addPostActionCreator>
-    // | ReturnType<typeof upDateNewPostActionCreator>
     | addMessageType
-    // | upDateNewMessageType
     | ReturnType<typeof followsucsess>
     | ReturnType<typeof unfollowsucsess>
     | ReturnType<typeof setUsers>
@@ -33,6 +32,7 @@ export type ActionValuesType =
     | ReturnType<typeof toggleisFollowig>
     | ReturnType<typeof setUserStatus>
     | ReturnType<typeof setErrorMessage>
+    | ReturnType<typeof initializedSucces>
 
 
 let RootReducer = combineReducers({
@@ -40,7 +40,7 @@ let RootReducer = combineReducers({
     dialogepage: dialogsReducer,
     userspage: userReducer,
     auth: authReducer,
-
+    app: appReducer,
 })
 
 
