@@ -9,7 +9,7 @@ const SET_USER_DATA = "SET_USER_DATA"
 const ERROR_MESSAGE="ERROR_MESSAGE"
 
 export type InitialAuthType = {
-    id: null | number
+    userId: null | number
     email: null | string
     login: null | string
     isAuth: boolean
@@ -17,7 +17,7 @@ export type InitialAuthType = {
 }
 
 let initialstate: InitialAuthType = {
-    id: null,
+    userId: null,
     email: null,
     login: null,
     isAuth: false,

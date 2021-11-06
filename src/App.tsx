@@ -4,7 +4,7 @@ import {Nav} from "./components/Nav/Nav";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {Route, withRouter} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import {DialogsContainer} from "./components/Dialog/DialogsContainer";
 import {UsersContainer} from "./components/Users/Userscontainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
@@ -16,19 +16,26 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {initialize} from "./redux/app-reducer";
 import {RootStateType} from "./redux/redux-store";
+import {Preloader} from "./common/preloader/Preloader";
 
 type  MapDispatch = {
-    initialize:()=>void
+    initialize: () => void
 }
-type MapStateToProps={
-    
+type MapStateToProps = {
+    initialized: boolean
 }
 
-export class App extends React.Component<MapDispatch> {
+type AppProps = MapDispatch & MapStateToProps
+
+export class App extends React.Component<AppProps> {
     componentDidMount() {
         this.props.initialize()
     }
+
     render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
 
         return (
             <div className="app-wrapper">
@@ -51,14 +58,16 @@ export class App extends React.Component<MapDispatch> {
         );
     }
 }
+
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
     return {
-        isAuth: state.auth.isAuth,
-        login: state.auth.login
+        initialized: state.app.initialized
     }
 }
-export const AppContainer =compose<ComponentType>(withRouter,connect(mapStateToProps, {initialize
 
+
+export const AppContainer = compose<ComponentType>(withRouter, connect(mapStateToProps, {
+    initialize
 }))(App)
 
 

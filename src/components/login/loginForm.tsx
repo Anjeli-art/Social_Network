@@ -27,6 +27,8 @@ type loginFormProps = MapStateToProps & MapDispatch
 
 export const LoginForm = (props: loginFormProps) => {
 
+    console.log("loooooogin",props.isAuth)
+
     if (props.isAuth) return <Redirect to={"/profile"}/>
 
     return (

@@ -12,8 +12,6 @@ type ProfileTypeProps = {
 }
 
 export const Profile: React.FC<ProfileTypeProps> = (props) => {
-    console.log(props)
-
     return (
         <div>
             <ProfileInfo
