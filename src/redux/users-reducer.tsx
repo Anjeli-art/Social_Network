@@ -88,6 +88,7 @@ export const toggleisFollowig = (togglefollow: boolean, id: number) => ({
 export const getUsers = (currentPage: number, pageSize: number) => {
     return (dispath: Dispatch<ActionValuesType>) => {
         dispath(toggleisFething(true))
+        // dispath(setCurrentPage(currentPage))
         usersApi.getUsers(currentPage, pageSize).then(data => {
             dispath(toggleisFething(false))
             dispath(setUsers(data.items))
