@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useState} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 
 
 type StatusType = {
@@ -11,6 +11,9 @@ export const StatusWithHooks: React.FC<StatusType> = (props) => {
     let [editMode,setEditMode]=useState(false)
     let [status,setStatus]=useState(props.status)
 
+    useEffect(()=>{
+        setStatus(props.status)
+    },[props.status])
    const activateEditMode=()=>{
        setEditMode(true)
    }
