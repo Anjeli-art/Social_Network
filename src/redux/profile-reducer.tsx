@@ -50,7 +50,7 @@ export type initialProfilePageType = {
 
 let initialstate: initialProfilePageType = {
     posts: [
-        {id: 1, message: "vvv", likecount: 3},
+        {id: 1, message: "vy hhhhh", likecount: 3},
         {id: 2, message: "vvv", likecount: 4}],
     // NewPost: "",
     profile: {

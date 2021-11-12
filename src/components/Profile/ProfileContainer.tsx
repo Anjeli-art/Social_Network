@@ -40,9 +40,6 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
     componentDidMount() {
 
         let userId = this.props.match.params.userId
-        console.log(userId)
-        // debugger
-
         if (!userId) {
             // userId=this.props.loginUserId прояснить ,,,,,,.................
             userId = String(this.props.loginUserId)
@@ -53,20 +50,12 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
         }
         this.props.getProfileUser(userId)
         this.props.getUserStatus(userId)
-        // if (!userId) {
-        //     userId = "2"
-        // }
-        //
-        // profileApi.getProfile(userId).then(data => {
-        //     this.props.setUsersProfile(data)
-        // })
 
     }
 
 
     render() {
         // if (!this.props.isAuth) return <Redirect to={"/login"}/>
-        console.log({...this.props})
         return (
             <Profile {...this.props}
                      profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateUserStatus}

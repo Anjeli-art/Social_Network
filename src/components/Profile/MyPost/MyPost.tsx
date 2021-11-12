@@ -9,9 +9,12 @@ export type TypeMyPost = {
     posts: PostType[]
     addPost: (NewPost: string) => void
 }
-export const MyPost: React.FC<TypeMyPost> = (props) => {
 
-    let PostElement = props.posts.map(p => <Post key={p.id} message={p.message} likecount={p.likecount}/>)
+
+export const MyPost: React.FC<TypeMyPost>=React.memo((props)=> {
+console.log("ggggggggggg")
+
+    let PostElement =[...props.posts].reverse().map(p => <Post key={p.id} message={p.message} likecount={p.likecount}/>)
 
 
     let onAddPost = (NewPost: string) => {
@@ -25,7 +28,9 @@ export const MyPost: React.FC<TypeMyPost> = (props) => {
             </div>
         </div>
     )
-}
+})
+
+
 type MyPostFormProps = {
     onAddPost: (NewPost: string) => void
 }
