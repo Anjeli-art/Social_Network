@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {getLogin} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import s from "./login.module.css"
+import {createField} from "../../utils/form-helper";
 
 
 type ErrorsType = {
@@ -25,11 +26,11 @@ type  MapDispatch = {
 type loginFormProps = MapStateToProps & MapDispatch
 
 
-export const LoginForm = (props: loginFormProps) => {
+export const LoginForm = ({isAuth,errorMessage,getLogin}:loginFormProps) => {
 
-    console.log("loooooogin",props.isAuth)
+    console.log("loooooogin",isAuth)
 
-    if (props.isAuth) return <Redirect to={"/profile"}/>
+    if (isAuth) return <Redirect to={"/profile"}/>
 
     return (
         <Formik
@@ -53,7 +54,7 @@ export const LoginForm = (props: loginFormProps) => {
                 return errors;
             }}
             onSubmit={(values) => {
-                props.getLogin(values.email, values.password, values.rememberMe)
+                getLogin(values.email, values.password, values.rememberMe)
                 console.log(Formik)
             }}>
             {({
@@ -66,24 +67,26 @@ export const LoginForm = (props: loginFormProps) => {
               }) => (
 
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <Field type="text" name="email" value={values.email} placeholder={"login"}
-                               onCnage={handleChange}
-                            // className={errors.email && touched.email  && s.errorinput}
-                        />
-                        <ErrorMessage name="email" component="div" className={s.errortext}/>
-                    </div>
-                    <div>
-                        <Field type="password" name="password" value={values.password} placeholder={"password"}
-                               onCnage={handleChange}
-                               className={errors.password && touched.password && s.errorinput}
-                        />
-                        <ErrorMessage name="password" component="div" className={s.errortext}/>
-                    </div>
+                    {createField("text","email",values.email,"login",handleChange,errors.email,touched.email,"email","div")}
+                    {createField("password","password",values.password,"password",handleChange,errors.password,touched.password,"password","div")}
+                    {/*<div>*/}
+                    {/*    <Field type="text" name="email" value={values.email} placeholder={"login"}*/}
+                    {/*           onCnage={handleChange}*/}
+                    {/*        className={errors.email && touched.email  && s.errorinput}*/}
+                    {/*    />*/}
+                    {/*    <ErrorMessage name="email" component="div" className={s.errortext}/>*/}
+                    {/*</div>*/}
+                    {/*<div>*/}
+                    {/*    <Field type="password" name="password" value={values.password} placeholder={"password"}*/}
+                    {/*           onCnage={handleChange}*/}
+                    {/*           className={errors.password && touched.password && s.errorinput}*/}
+                    {/*    />*/}
+                    {/*    <ErrorMessage name="password" component="div" className={s.errortext}/>*/}
+                    {/*</div>*/}
                     <div>
                         <Field type="checkbox" name="rememberMe" onCnage={handleChange}/>remember me
                     </div>
-                    <div className={s.errortext}>{props.errorMessage}</div>
+                    <div className={s.errortext}>{errorMessage}</div>
                     <div>
                         <button type="submit">
                             Submit

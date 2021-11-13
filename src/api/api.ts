@@ -35,14 +35,11 @@ export const authApi = {
     },
     getlogin: (email:string,password:string,remmemberMe:boolean) => {
         return instatce.post(`/auth/login`,{email:email,password:password,remmemberMe:remmemberMe}).then(response => {
-            console.log(response.data+"0000")
             return response.data
         })
     },
     getlogout: () => {
-        console.log("1111")
         return instatce.delete(`/auth/login`).then(response => {
-            console.log(response.data+"1111")
             return response.data
         })
     }

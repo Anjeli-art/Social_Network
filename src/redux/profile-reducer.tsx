@@ -4,10 +4,10 @@ import {profileApi} from "../api/api";
 import {Dispatch} from "redux";
 
 
-const ADD_POST = "ADD-POST"
-const DELETE_POST="DELETE_POST"
-const SET_USER_PROFILE = "SET_USER_PROFILE"
-const SET_STATUS = "SET_STATUS"
+const ADD_POST = "samurai-network/profile/ADD-POST"
+const DELETE_POST = "samurai-network/profile/DELETE_POST"
+const SET_USER_PROFILE = "samurai-network/profile/SET_USER_PROFILE"
+const SET_STATUS = "samurai-network/profile/SET_STATUS"
 
 
 export type PostType = {
@@ -79,48 +79,39 @@ let initialstate: InitialProfilePageType = {
 export const profileReducer = (state = initialstate, action: ActionValuesType): InitialProfilePageType => {
     switch (action.type) {
         case  ADD_POST:
-            return {...state, posts: [...state.posts, {id: 5, message: action.NewPost, likecount: 2}], }
+            return {...state, posts: [...state.posts, {id: 5, message: action.NewPost, likecount: 2}],}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_STATUS:
             return {...state, status: action.status}
         case DELETE_POST:
-            return {...state,posts:state.posts.filter(el=>el.id !==action.id)}
+            return {...state, posts: state.posts.filter(el => el.id !== action.id)}
         default:
             return state
     }
 }
 
-export const addPostActionCreator = (NewPost:string) => ({type: ADD_POST,NewPost}) as const
+export const addPostActionCreator = (NewPost: string) => ({type: ADD_POST, NewPost}) as const
 export const setUsersProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const
 export const setUserStatus = (status: string) => ({type: SET_STATUS, status}) as const
-export const deletePostActionCreator=(id:number)=>({type:DELETE_POST,id})as const
+export const deletePostActionCreator = (id: number) => ({type: DELETE_POST, id}) as const
 
-export const getProfileUser = (userId: number)=> {
-    return (dispath: Dispatch<ActionValuesType>) => {
-        profileApi.getProfile(userId).then(data => {
-            dispath(setUsersProfile(data))
-        })
+export const getProfileUser = (userId: number) => async (dispath: Dispatch<ActionValuesType>) => {
+    let data = await profileApi.getProfile(userId)
+    dispath(setUsersProfile(data))
 
-    }
 }
 
-export const getUserStatus = (userId: number)=> {
-    return (dispath: Dispatch<ActionValuesType>) => {
-        profileApi.getStatus(userId).then(data => {
-            dispath(setUserStatus(data))
-        })
+export const getUserStatus = (userId: number) => async (dispath: Dispatch<ActionValuesType>) => {
+    let data = await profileApi.getStatus(userId)
+    dispath(setUserStatus(data))
 
-    }
 }
 
-export const updateUserStatus = (status: string) => {
-    return (dispath: Dispatch<ActionValuesType>) => {
-        profileApi.updateStatus(status).then(response => {
-            if (response.data.resultCode === 0) {
-                dispath(setUserStatus(status))
-            }
-        })
-
+export const updateUserStatus = (status: string) => async (dispath: Dispatch<ActionValuesType>) => {
+    let response = await profileApi.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispath(setUserStatus(status))
     }
+
 }

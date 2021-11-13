@@ -12,7 +12,6 @@ import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {Login} from "./components/login/login";
 import {Friends} from "./components/Friends/Friends";
 import {connect} from "react-redux";
-
 import {compose} from "redux";
 import {initialize} from "./redux/app-reducer";
 import {RootStateType} from "./redux/redux-store";

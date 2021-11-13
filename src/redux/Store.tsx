@@ -1,8 +1,4 @@
 
-
-import {addPostActionCreator} from "./profile-reducer";
-import {addMessageType} from "./dialogs-reducer";
-
 // export type StoreType = {
 //     _state: StateType
 //     getState: () => StateType
@@ -10,8 +6,6 @@ import {addMessageType} from "./dialogs-reducer";
 //     dispatch: (action: ActionValuesType) => void
 //     subscribe: (observer: any) => void
 //
-// }
-
 
 
 // export let store: StoreType = {

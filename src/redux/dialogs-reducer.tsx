@@ -1,8 +1,8 @@
 import React from 'react';
 import {ActionValuesType} from "./redux-store";
 
-const ADD_MESSAGE = "ADD-MESSAGE"
-const DELETE_MESSAGE="DELETE_MESSAGE"
+const ADD_MESSAGE = "samurai-network/dialog/ADD-MESSAGE"
+const DELETE_MESSAGE="samurai-network/dialog/DELETE_MESSAGE"
 
 
 

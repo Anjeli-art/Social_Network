@@ -1,8 +1,7 @@
 import React from 'react';
 import {ActionValuesType, RootStateType} from "./redux-store";
 import {ThunkDispatch} from "redux-thunk";
-import {authApi} from "../api/api";
-import {getAuthHeader, setAuth} from "./auth-reducer";
+import {getAuthHeader} from "./auth-reducer";
 
 
 const SET_INITIALAIZED = "SET_INITIALAIZED"
@@ -38,7 +37,6 @@ export const initialize = () => (dispatch: ThunkDispatch<RootStateType, undefine
     Promise.all([promise]).then(() => {
         dispatch(initializedSucces())
     })
-
 }
 
 
