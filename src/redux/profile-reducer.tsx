@@ -5,7 +5,7 @@ import {Dispatch} from "redux";
 
 
 const ADD_POST = "ADD-POST"
-// const UPDATE_NEW_POST = "UPDATE-NEW-POST"
+const DELETE_POST="DELETE_POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 
@@ -52,7 +52,6 @@ let initialstate: initialProfilePageType = {
     posts: [
         {id: 1, message: "vy hhhhh", likecount: 3},
         {id: 2, message: "vvv", likecount: 4}],
-    // NewPost: "",
     profile: {
         "aboutMe": "",
         "contacts": {
@@ -82,21 +81,21 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
     switch (action.type) {
         case  ADD_POST:
             return {...state, posts: [...state.posts, {id: 5, message: action.NewPost, likecount: 2}], }
-        // case UPDATE_NEW_POST:
-        //     return {...state, NewPost: action.New}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_STATUS:
             return {...state, status: action.status}
+        case DELETE_POST:
+            return {...state,posts:state.posts.filter(el=>el.id !==action.id)}
         default:
             return state
     }
 }
 
 export const addPostActionCreator = (NewPost:string) => ({type: ADD_POST,NewPost}) as const
-// export const upDateNewPostActionCreator = (text: string) => ({type: UPDATE_NEW_POST, New: text}) as const//типизация двух видов тут и в экшнкреэйторе
 export const setUsersProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const
 export const setUserStatus = (status: string) => ({type: SET_STATUS, status}) as const
+export const deletePostActionCreator=(id:number)=>({type:DELETE_POST,id})as const
 
 export const getProfileUser = (userId: number)=> {
     return (dispath: Dispatch<ActionValuesType>) => {

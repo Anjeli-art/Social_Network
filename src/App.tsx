@@ -4,7 +4,7 @@ import {Nav} from "./components/Nav/Nav";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {Route, Switch, withRouter} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import {DialogsContainer} from "./components/Dialog/DialogsContainer";
 import {UsersContainer} from "./components/Users/Userscontainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";

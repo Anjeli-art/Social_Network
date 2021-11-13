@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {
-    addPostActionCreator,
+    addPostActionCreator, deletePostActionCreator,
     profileReducer,
     setUsersProfile, setUserStatus,
 } from "./profile-reducer";
@@ -33,6 +33,7 @@ export type ActionValuesType =
     | ReturnType<typeof setUserStatus>
     | ReturnType<typeof setErrorMessage>
     | ReturnType<typeof initializedSucces>
+    | ReturnType<typeof deletePostActionCreator>
 
 
 let RootReducer = combineReducers({
