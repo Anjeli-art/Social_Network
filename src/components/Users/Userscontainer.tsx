@@ -44,11 +44,13 @@ type UsesrApiType = MapDispatch & MapStateToProps
 class UsersAPIComponent extends React.Component<UsesrApiType> {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        let {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage,pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getPageBold(pageNumber, this.props.pageSize)//возможно запись не верна пофиксить санку
+        let {pageSize}=this.props
+        this.props.getPageBold(pageNumber,pageSize)//возможно запись не верна пофиксить санку
     }
 
     render() {
@@ -86,7 +88,7 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
         pageSize: getpageSizeState(state),
         totalUsersCount: getTotalUsersCountState(state),
         currentPage: getcurrentPageState(state),
-        isFetching:getisFetchingState(state),
+        isFetching: getisFetchingState(state),
         followngInProgress: getfollowngInProgressState(state)
     }
 }
