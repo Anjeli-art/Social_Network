@@ -1,9 +1,9 @@
 import React from 'react';
-import {addPostActionCreator, deletePostActionCreator, initialProfilePageType, profileReducer} from "./profile-reducer";
+import {addPostActionCreator, deletePostActionCreator, InitialProfilePageType, profileReducer} from "./profile-reducer";
 
 
 
-let initialstate: initialProfilePageType = {
+let initialstate: InitialProfilePageType = {
     posts: [
         {id: 1, message: "vy hhhhh", likecount: 3},
         {id: 2, message: "vvv", likecount: 4}],

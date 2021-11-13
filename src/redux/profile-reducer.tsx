@@ -40,15 +40,14 @@ export type ProfileType = {
     userId: number
     photos: PhotoType
 }
-export type initialProfilePageType = {
+export type InitialProfilePageType = {
     posts: PostType[]
-    // NewPost: string
     profile: ProfileType
     status: string
 }
 
 
-let initialstate: initialProfilePageType = {
+let initialstate: InitialProfilePageType = {
     posts: [
         {id: 1, message: "vy hhhhh", likecount: 3},
         {id: 2, message: "vvv", likecount: 4}],
@@ -77,7 +76,7 @@ let initialstate: initialProfilePageType = {
 }
 
 
-export const profileReducer = (state = initialstate, action: ActionValuesType): initialProfilePageType => {
+export const profileReducer = (state = initialstate, action: ActionValuesType): InitialProfilePageType => {
     switch (action.type) {
         case  ADD_POST:
             return {...state, posts: [...state.posts, {id: 5, message: action.NewPost, likecount: 2}], }

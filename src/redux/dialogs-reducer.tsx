@@ -1,19 +1,19 @@
 import React from 'react';
 import {ActionValuesType} from "./redux-store";
 
-const ADD_MESSGE = "ADD-MESSGE"
-// const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE"
+const ADD_MESSAGE = "ADD-MESSAGE"
+const DELETE_MESSAGE="DELETE_MESSAGE"
 
-export type addMessageType = {
-    type: "ADD-MESSGE"
+
+
+export type AddMessageType = {
+    type: typeof ADD_MESSAGE
     NewMessage:string
-}//типизация двух видов тут и в экшнкреэйторе
-// export type upDateNewMessageType = {
-//     type: "UPDATE-NEW-MESSAGE"
-//     New: string
-// }
-
-
+}
+export type DeleteMessageType={
+    type: typeof DELETE_MESSAGE
+    id:number
+}
 export type MessageType = {
     id: number
     message: string | undefined
@@ -25,7 +25,6 @@ export type DialogType = {
 
 export type InitDialogsStateType = {
     messages: MessageType[]
-    // NewMessage: string
     dialogs: DialogType[]
 }
 
@@ -47,18 +46,15 @@ let initialstate: InitDialogsStateType = {
 
 export const dialogsReducer = (state = initialstate, action: ActionValuesType): InitDialogsStateType => {
     switch (action.type) {
-        case ADD_MESSGE:
+        case ADD_MESSAGE:
             return {...state,messages: [...state.messages, {id: 5, message: action.NewMessage},]}
-        // case UPDATE_NEW_MESSAGE:
-        //     return {...state, NewMessage: action.New}
-
+        case DELETE_MESSAGE:
+            return {...state,messages: [...state.messages.filter(el=>el.id !==action.id)]}
         default:
             return state
     }
 }
 
-export const addMessageActionCreator = (NewMessage:string): addMessageType => ({type: ADD_MESSGE,NewMessage})
-// export const upDateNewMessageActionCreator = (text: string): upDateNewMessageType => ({
-//     type: UPDATE_NEW_MESSAGE,
-//     New: text
-// })//типизация двух видов тут и в экшнкреэйторе
+export const addMessageActionCreator = (NewMessage:string): AddMessageType => ({type: ADD_MESSAGE,NewMessage})as const
+export const deleteMessageActionCreator=(id:number):DeleteMessageType=>({type:DELETE_MESSAGE,id})
+

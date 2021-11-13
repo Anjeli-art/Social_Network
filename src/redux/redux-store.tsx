@@ -4,7 +4,7 @@ import {
     profileReducer,
     setUsersProfile, setUserStatus,
 } from "./profile-reducer";
-import {addMessageType, dialogsReducer} from "./dialogs-reducer";
+import {AddMessageType, DeleteMessageType, dialogsReducer} from "./dialogs-reducer";
 import {
     followsucsess,
     setCurrentPage,
@@ -20,7 +20,8 @@ import {appReducer, initializedSucces} from "./app-reducer";
 
 export type ActionValuesType =
     ReturnType<typeof addPostActionCreator>
-    | addMessageType
+    | AddMessageType
+    |DeleteMessageType
     | ReturnType<typeof followsucsess>
     | ReturnType<typeof unfollowsucsess>
     | ReturnType<typeof setUsers>
