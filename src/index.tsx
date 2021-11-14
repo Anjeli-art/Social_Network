@@ -1,22 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SamuraiApp from './App';
 import './index.css';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {AppContainer} from "./App";
-import {BrowserRouter} from "react-router-dom";
-import {Provider} from "react-redux"
-import {store} from "./redux/redux-store";
 
 
 ReactDOM.render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <AppContainer/>
-            {/*<App/>*/}
-            {/*store={store}*/}
-        </Provider>
-    </BrowserRouter>, document.getElementById('root')
+    <SamuraiApp/>
+    , document.getElementById('root')
 )
 
 

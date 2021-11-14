@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 
 
-type StatusType = {
+export type StatusType = {
     status: string
     updateStatus: (status: string) => void
 }
@@ -24,7 +24,6 @@ export class Status extends React.Component<StatusType> {
             editMode: false
         })
         this.props.updateStatus(this.state.status)
-        console.log(this.state.status)
     }
     onStatusChanged = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({status: e.currentTarget.value})

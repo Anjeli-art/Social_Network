@@ -47,13 +47,13 @@ let RootReducer = combineReducers({
 export type RootStateType = ReturnType<typeof RootReducer>
 
 //@ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export const store:Store<RootStateType, ActionValuesType> = createStore(RootReducer,composeEnhancers(applyMiddleware(thunkMiddleware)
-));
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// export const store:Store<RootStateType, ActionValuesType> = createStore(RootReducer,composeEnhancers(applyMiddleware(thunkMiddleware)
+// ));
 
 //extantion
 
-// export let store: Store<RootStateType, ActionValuesType> = createStore(RootReducer, applyMiddleware(thunkMiddleware))
+export let store: Store<RootStateType, ActionValuesType> = createStore(RootReducer, applyMiddleware(thunkMiddleware))
 
 //@ts-ignore
-// window.store = store
+window.store = store
