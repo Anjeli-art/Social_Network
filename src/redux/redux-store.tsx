@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, createStore, Store,compose} from "redux";
 import {
     addPostActionCreator, deletePostActionCreator,
     profileReducer,
@@ -44,11 +44,16 @@ let RootReducer = combineReducers({
     auth: authReducer,
     app: appReducer,
 })
-
-
 export type RootStateType = ReturnType<typeof RootReducer>
 
-export let store: Store<RootStateType, ActionValuesType> = createStore(RootReducer, applyMiddleware(thunkMiddleware))
+//@ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store:Store<RootStateType, ActionValuesType> = createStore(RootReducer,composeEnhancers(applyMiddleware(thunkMiddleware)
+));
+
+//extantion
+
+// export let store: Store<RootStateType, ActionValuesType> = createStore(RootReducer, applyMiddleware(thunkMiddleware))
 
 //@ts-ignore
-window.store = store
+// window.store = store

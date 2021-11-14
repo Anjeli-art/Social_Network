@@ -5,8 +5,8 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {AppContainer} from "./App";
 import {BrowserRouter} from "react-router-dom";
-import {store} from "./redux/redux-store";
 import {Provider} from "react-redux"
+import {store} from "./redux/redux-store";
 
 
 ReactDOM.render(
