@@ -12,7 +12,6 @@ export type TypeMyPost = {
 
 
 export const MyPost: React.FC<TypeMyPost>=React.memo((props)=> {
-console.log("ggggggggggg")
 
     let PostElement =[...props.posts].reverse().map(p => <Post key={p.id} message={p.message} likecount={p.likecount}/>)
 

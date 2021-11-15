@@ -34,36 +34,6 @@ export const Users: React.FC<PropsType> = ({totalUsersCount, pageSize, currentPa
             {/*    >{el}</span>*/}
             {/*})}*/}
             {users.map(el => <User user={el} key={el.id} follow={props.follow} unfollow={props.unfollow} followngInProgress={props.followngInProgress}/>
-                    // <div key={el.id} className={s.userprofile}>
-                    //     <div>
-                    //         <div>
-                    //             <NavLink to={"/profile" + "/" + el.id}>
-                    //                 <img src={el.photos.small !== null ? el.photos.small : userphoto}/>
-                    //             </NavLink>
-                    //         </div>
-                    //         <div>
-                    //             {el.followed ?
-                    //                 <button disabled={props.followngInProgress.some(id => id === el.id)}
-                    //                         onClick={() => {
-                    //                             props.unfollow(el.id)
-                    //                         }}>unfollow</button> :
-                    //                 <button disabled={props.followngInProgress.some(id => id === el.id)}
-                    //                         onClick={() => {
-                    //                             props.follow(el.id)
-                    //                         }}>follow</button>}
-                    //         </div>
-                    //     </div>
-                    //     <div className={s.userdata}>
-                    //         <div className={s.username}>
-                    //             <p>{el.name}</p>
-                    //             <b>{el.status}</b>
-                    //         </div>
-                    //         <div>
-                    //             {/*<p>{el.location.city}</p>*/}
-                    //             {/*<p>{el.location.country}</p>*/}
-                    //         </div>
-                    //     </div>
-                    // </div>
                 )
             })
         </div>

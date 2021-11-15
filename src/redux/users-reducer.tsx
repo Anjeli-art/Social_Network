@@ -42,7 +42,7 @@ export type initialUserPageType = {
 
 let initialstate: initialUserPageType = {
     users: [],
-    pageSize: 10,
+    pageSize: 4,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,

@@ -1,3 +1,11 @@
 .pageActive{
     font-weight: bold;
+    padding: 5px;
+}
+.paginator{
+    padding: 10px;
+}
+
+.block{
+   padding: 5px;
 }
