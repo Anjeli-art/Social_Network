@@ -48,5 +48,7 @@ let mapDicpatchtoProps = (dispatch: Dispatch): MapDicpatch => {
 // export const DialogsContainer = connect(mapStateToProps, mapDicpatchtoProps)(AuthRedirectComponent) // 1 обертка конект редакс
 
 
-export const DialogsContainer = compose<ComponentType>(connect(mapStateToProps, mapDicpatchtoProps), WithAuthRedirect)(Dialogs)
+const DialogsContainer = compose<ComponentType>(connect(mapStateToProps, mapDicpatchtoProps), WithAuthRedirect)(Dialogs)
+
+export default DialogsContainer
 

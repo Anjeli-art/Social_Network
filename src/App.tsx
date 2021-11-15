@@ -5,9 +5,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {BrowserRouter, Route, withRouter} from 'react-router-dom';
-import {DialogsContainer} from "./components/Dialog/DialogsContainer";
 import {UsersContainer} from "./components/Users/Userscontainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {Login} from "./components/login/login";
 import {Friends} from "./components/Friends/Friends";
@@ -16,7 +14,11 @@ import {compose} from "redux";
 import {initialize} from "./redux/app-reducer";
 import {RootStateType, store} from "./redux/redux-store";
 import {Preloader} from "./common/preloader/Preloader";
-
+import {WithSuspense} from "./hoc/WithSuspense";
+// import {DialogsContainer} from "./components/Dialog/DialogsContainer";
+const DialogsContainer = React.lazy(() => import("./components/Dialog/DialogsContainer"))
+// import {ProfileContainer} from "./components/Profile/ProfileContainer";
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"))
 
 type  MapDispatch = {
     initialize: () => void
@@ -42,9 +44,18 @@ export class App extends React.Component<AppProps> {
                 <HeaderContainer/>
                 <Nav/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                    <Route path="/dialogs" render={() =>
-                        <DialogsContainer/>}/>
+                    {/*<Route path="/profile/:userId?" render={() => {*/}
+                    {/*    return <React.Suspense fallback={<div>...loading</div>}>*/}
+                    {/*        <ProfileContainer/>*/}
+                    {/*    </React.Suspense>*/}
+                    {/*}}/>*/}
+                    {/*<Route path="/dialogs" render={() => {*/}
+                    {/*    return <React.Suspense fallback={<div>...loading</div>}>*/}
+                    {/*        <DialogsContainer/>*/}
+                    {/*    </React.Suspense>*/}
+                    {/*}}/>*/}
+                    <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
+                    <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
                     <Route path="/users" render={() =>
                         <UsersContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>
@@ -71,7 +82,7 @@ export const AppContainer = compose<ComponentType>(withRouter, connect(mapStateT
 }))(App)
 
 let SamuraiApp = () => {
-   return <BrowserRouter>
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>

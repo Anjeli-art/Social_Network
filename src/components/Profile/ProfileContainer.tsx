@@ -89,10 +89,12 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 //     getProfileUser
 // })(withRouterContainerComponent)
 
-export const ProfileContainer = compose<ComponentType>(connect(mapStateToProps,
+const ProfileContainer = compose<ComponentType>(connect(mapStateToProps,
     {
         setUsersProfile,
         getProfileUser,
         getUserStatus,
         updateUserStatus
     }), withRouter)(ProfileAPIComponent)
+
+export default ProfileContainer
