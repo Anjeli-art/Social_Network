@@ -4,7 +4,7 @@ import {Nav} from "./components/Nav/Nav";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {BrowserRouter, Route, withRouter} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route, withRouter} from 'react-router-dom';
 import {UsersContainer} from "./components/Users/Userscontainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {Login} from "./components/login/login";
@@ -82,11 +82,11 @@ export const AppContainer = compose<ComponentType>(withRouter, connect(mapStateT
 }))(App)
 
 let SamuraiApp = () => {
-    return <BrowserRouter>
+    return <HashRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
 export default SamuraiApp
