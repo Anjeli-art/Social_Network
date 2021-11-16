@@ -8,7 +8,7 @@ const ADD_POST = "samurai-network/profile/ADD-POST"
 const DELETE_POST = "samurai-network/profile/DELETE_POST"
 const SET_USER_PROFILE = "samurai-network/profile/SET_USER_PROFILE"
 const SET_STATUS = "samurai-network/profile/SET_STATUS"
-
+const SET_USER_PHOTO="samurai-network/profile/SET_USER_PHOTO"
 
 export type PostType = {
     id: number
@@ -32,7 +32,6 @@ type PhotoType = {
     large: string
 }
 export type ProfileType = {
-    aboutMe: string
     contacts: ContactsType
     lookingForAJob: boolean
     lookingForAJobDescription: string
@@ -52,7 +51,6 @@ let initialstate: InitialProfilePageType = {
         {id: 1, message: "vy hhhhh", likecount: 3},
         {id: 2, message: "vvv", likecount: 4}],
     profile: {
-        "aboutMe": "",
         "contacts": {
             "facebook": "",
             "website": null,
@@ -84,6 +82,8 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
             return {...state, profile: action.profile}
         case SET_STATUS:
             return {...state, status: action.status}
+        case SET_USER_PHOTO:
+            return {...state,profile:{...state.profile,photos:{...state.profile.photos,small:action.file,large:action.file}} }
         case DELETE_POST:
             return {...state, posts: state.posts.filter(el => el.id !== action.id)}
         default:
@@ -95,6 +95,7 @@ export const addPostActionCreator = (NewPost: string) => ({type: ADD_POST, NewPo
 export const setUsersProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile}) as const
 export const setUserStatus = (status: string) => ({type: SET_STATUS, status}) as const
 export const deletePostActionCreator = (id: number) => ({type: DELETE_POST, id}) as const
+export const setUserPhoto=(file:string)=>({type: SET_USER_PHOTO, file})as const
 
 export const getProfileUser = (userId: number) => async (dispath: Dispatch<ActionValuesType>) => {
     let data = await profileApi.getProfile(userId)
@@ -112,6 +113,13 @@ export const updateUserStatus = (status: string) => async (dispath: Dispatch<Act
     let response = await profileApi.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispath(setUserStatus(status))
+    }
+
+}
+export const savePhoto = (file: string) => async (dispath: Dispatch<ActionValuesType>) => {
+    let response = await profileApi.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispath(setUserPhoto(response.data.data.photos.small))
     }
 
 }

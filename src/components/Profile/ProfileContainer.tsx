@@ -7,11 +7,12 @@ import {
     getUserStatus,
     ProfileType,
     setUsersProfile,
-    updateUserStatus
+    updateUserStatus,
+    savePhoto
 } from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
-import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+
 
 
 type MapStateToProps = {
@@ -25,6 +26,7 @@ type  MapDispatch = {
     getProfileUser: (userId: string) => void
     getUserStatus: (userId: string) => void
     updateUserStatus: (status: string) => void
+    savePhoto:any////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 type ProfileAPIType = MapDispatch & MapStateToProps
@@ -37,11 +39,9 @@ type PropsType = RouteComponentProps<PathParams> & ProfileAPIType
 
 export class ProfileAPIComponent extends React.Component <PropsType> {
 
-    componentDidMount() {
-
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            // userId=this.props.loginUserId прояснить ,,,,,,.................
             userId = String(this.props.loginUserId)
 
             if (userId === "null") {
@@ -50,6 +50,19 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
         }
         this.props.getProfileUser(userId)
         this.props.getUserStatus(userId)
+    }
+
+    componentDidMount() {
+
+        this.refreshProfile()
+
+    }
+
+    componentDidUpdate(prevProps: any) {
+        console.log(this.props.match.params.userId)
+        if (this.props.match.params.userId != prevProps.match.params.userId) {
+            this.refreshProfile()
+        }
 
     }
 
@@ -58,7 +71,11 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
         // if (!this.props.isAuth) return <Redirect to={"/login"}/>
         return (
             <Profile {...this.props}
-                     profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateUserStatus}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatus={this.props.updateUserStatus}
+                     isOwner={!this.props.match.params.userId}
+                     savePhoto={this.props.savePhoto}
             />
 
         )
@@ -94,7 +111,8 @@ const ProfileContainer = compose<ComponentType>(connect(mapStateToProps,
         setUsersProfile,
         getProfileUser,
         getUserStatus,
-        updateUserStatus
+        updateUserStatus,
+        savePhoto
     }), withRouter)(ProfileAPIComponent)
 
 export default ProfileContainer

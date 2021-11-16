@@ -62,5 +62,10 @@ export const profileApi = {
     },
     updateStatus: (status: string) => {
         return instatce.put("/profile/status/", {status: status})
+    },
+    savePhoto:(file:string)=>{
+        let formData=new FormData()
+        formData.append("image",file)
+        return instatce.put("/profile/photo/",formData,{headers:{"Content-Type":"multipart/form-data"}} )
     }
 }

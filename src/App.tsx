@@ -82,7 +82,7 @@ export const AppContainer = compose<ComponentType>(withRouter, connect(mapStateT
 }))(App)
 
 let SamuraiApp = () => {
-    return <HashRouter basename={process.env.PUBLIC_URL}>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>

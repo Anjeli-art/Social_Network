@@ -8,7 +8,8 @@ type ProfileTypeProps = {
     profile: ProfileType
     status: string
     updateStatus: (status: string) => void
-
+    isOwner:boolean
+    savePhoto:any///////////////////////////////////////////////
 }
 
 export const Profile: React.FC<ProfileTypeProps> = (props) => {
