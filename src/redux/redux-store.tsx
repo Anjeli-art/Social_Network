@@ -1,7 +1,7 @@
-import {applyMiddleware, combineReducers, createStore, Store,compose} from "redux";
+import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {
     addPostActionCreator, deletePostActionCreator,
-    profileReducer, setUserPhoto,
+    profileReducer, setErrorMessageProfile, setProfileFlag, setUserPhoto,
     setUsersProfile, setUserStatus,
 } from "./profile-reducer";
 import {AddMessageType, DeleteMessageType, dialogsReducer} from "./dialogs-reducer";
@@ -14,14 +14,14 @@ import {
     unfollowsucsess,
     userReducer
 } from "./users-reducer";
-import {authReducer, setAuth, setErrorMessage} from "./auth-reducer";
+import {authReducer, getCapthca, setAuth, setErrorMessage} from "./auth-reducer";
 import thunkMiddleware from "redux-thunk"
 import {appReducer, initializedSucces} from "./app-reducer";
 
 export type ActionValuesType =
     ReturnType<typeof addPostActionCreator>
     | AddMessageType
-    |DeleteMessageType
+    | DeleteMessageType
     | ReturnType<typeof followsucsess>
     | ReturnType<typeof unfollowsucsess>
     | ReturnType<typeof setUsers>
@@ -36,8 +36,9 @@ export type ActionValuesType =
     | ReturnType<typeof initializedSucces>
     | ReturnType<typeof deletePostActionCreator>
     | ReturnType<typeof setUserPhoto>
-
-
+    | ReturnType<typeof setErrorMessageProfile>
+    | ReturnType<typeof setProfileFlag>
+    | ReturnType<typeof getCapthca>
 let RootReducer = combineReducers({
     profilepage: profileReducer,
     dialogepage: dialogsReducer,

@@ -5,7 +5,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {BrowserRouter, HashRouter, Route, withRouter} from 'react-router-dom';
-import {UsersContainer} from "./components/Users/Userscontainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {Login} from "./components/login/login";
 import {Friends} from "./components/Friends/Friends";
@@ -15,9 +15,9 @@ import {initialize} from "./redux/app-reducer";
 import {RootStateType, store} from "./redux/redux-store";
 import {Preloader} from "./common/preloader/Preloader";
 import {WithSuspense} from "./hoc/WithSuspense";
-// import {DialogsContainer} from "./components/Dialog/DialogsContainer";
+// import DialogsContainer from "./components/Dialog/DialogsContainer";
 const DialogsContainer = React.lazy(() => import("./components/Dialog/DialogsContainer"))
-// import {ProfileContainer} from "./components/Profile/ProfileContainer";
+// import ProfileContainer from "./components/Profile/ProfileContainer";
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"))
 
 type  MapDispatch = {
@@ -56,6 +56,8 @@ export class App extends React.Component<AppProps> {
                     {/*}}/>*/}
                     <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
                     <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
+                    {/*<Route path="/profile/:userId?" render={()=><ProfileContainer/>}/>*/}
+                    {/*<Route path="/dialogs" render={()=><DialogsContainer/>}/>*/}
                     <Route path="/users" render={() =>
                         <UsersContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>

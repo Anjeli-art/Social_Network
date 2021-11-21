@@ -1,10 +1,11 @@
 import React from 'react';
 import {ActionValuesType, RootStateType} from "./redux-store";
-import {authApi} from "../api/api";
+import {authApi, SecurityApi} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 
 const SET_USER_DATA = "samurai-network/auth/SET_USER_DATA"
 const ERROR_MESSAGE = "samurai-network/auth/ERROR_MESSAGE"
+const GET_CAPTCHA_URL = "samurai-network/auth/GET_CAPTCHA_URL"
 
 export type InitialAuthType = {
     userId: null | number
@@ -12,6 +13,7 @@ export type InitialAuthType = {
     login: null | string
     isAuth: boolean
     errorMessage: null | string
+    captcha: string | null
 }
 
 let initialstate: InitialAuthType = {
@@ -19,7 +21,8 @@ let initialstate: InitialAuthType = {
     email: null,
     login: null,
     isAuth: false,
-    errorMessage: null
+    errorMessage: null,
+    captcha: null
 }
 
 export const authReducer = (state = initialstate, action: ActionValuesType): InitialAuthType => {
@@ -29,6 +32,8 @@ export const authReducer = (state = initialstate, action: ActionValuesType): Ini
             return {...state, ...action.payload}
         case ERROR_MESSAGE:
             return {...state, errorMessage: action.errorMessage}
+        case GET_CAPTCHA_URL:
+            return {...state, ...action.payload}
         default:
             return state
     }
@@ -38,6 +43,11 @@ export const authReducer = (state = initialstate, action: ActionValuesType): Ini
 export const setAuth = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
     payload: {userId, email, login, isAuth}
+}) as const
+
+export const getCapthca = (captcha: string | null) => ({
+    type: GET_CAPTCHA_URL,
+    payload: {captcha}
 }) as const
 
 export const setErrorMessage = (errorMessage: string) => {
@@ -57,17 +67,27 @@ export const getAuthHeader = () => async (dispatch: ThunkDispatch<RootStateType,
 }
 
 
-export const getLogin = (email: string, password: string, remmemberMe: boolean) =>
+export const getLogin = (email: string, password: string, remmemberMe: boolean, captcha: string | null) =>
     async (dispatch: ThunkDispatch<RootStateType, undefined, ActionValuesType>) => {
-    let data = await authApi.getlogin(email, password, remmemberMe)
-    if (data.resultCode === 0) {
-        dispatch(getAuthHeader())
-        dispatch(setErrorMessage(""))
-    } else {
-        let message = data.messages.length > 0 ? data.messages[0] : "Some Error"
-        dispatch(setErrorMessage(message))
+        let data = await authApi.getlogin(email, password, remmemberMe, captcha)
+        if (data.resultCode === 0) {
+            dispatch(getAuthHeader())
+            dispatch(setErrorMessage(""))
+        } else {
+            if (data.resultCode === 10) {
+                dispatch(getCaptchaUrl())
+            }
+            let message = data.messages.length > 0 ? data.messages[0] : "Some Error"
+            dispatch(setErrorMessage(message))
+        }
     }
-}
+
+export const getCaptchaUrl = () =>
+    async (dispatch: ThunkDispatch<RootStateType, undefined, ActionValuesType>) => {
+        let response = await SecurityApi.getCaptcha()
+        let captchaUrl = response.data.url
+        dispatch(getCapthca(captchaUrl))
+    }
 
 
 export const getLogout = () => async (dispatch: ThunkDispatch<RootStateType, undefined, ActionValuesType>) => {

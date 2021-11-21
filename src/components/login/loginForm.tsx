@@ -17,22 +17,22 @@ type ErrorsType = {
 type MapStateToProps = {
     isAuth: boolean
     errorMessage: null | string
-
+    captcha: string | null
 }
 type  MapDispatch = {
-    getLogin: (email: string, password: string, remmemberMe: boolean) => void
+    getLogin: (email: string, password: string, remmemberMe: boolean,captcha: string | null) => void
 }
 
 type loginFormProps = MapStateToProps & MapDispatch
 
 
-export const LoginForm = ({isAuth,errorMessage,getLogin}:loginFormProps) => {
+export const LoginForm = ({isAuth,errorMessage,getLogin,captcha}:loginFormProps) => {
 
     if (isAuth) return <Redirect to={"/profile"}/>
 
     return (
         <Formik
-            initialValues={{email: '', password: '', rememberMe: true}}
+            initialValues={{email: '', password: '', rememberMe: true,captcha:""}}
             validate={values => {
                 const errors: ErrorsType = {};
                 if (!values.email) {
@@ -52,35 +52,20 @@ export const LoginForm = ({isAuth,errorMessage,getLogin}:loginFormProps) => {
                 return errors;
             }}
             onSubmit={(values) => {
-                getLogin(values.email, values.password, values.rememberMe)
-                console.log(Formik)
+                getLogin(values.email, values.password, values.rememberMe, values.captcha)
             }}>
             {({
-                  isSubmitting,
                   handleChange,
-                  values,
                   handleSubmit,
                   errors,
                   touched,
               }) => (
 
                 <form onSubmit={handleSubmit}>
-                    {createField("text","email",values.email,"login",handleChange,errors.email,touched.email,"email","div")}
-                    {createField("password","password",values.password,"password",handleChange,errors.password,touched.password,"password","div")}
-                    {/*<div>*/}
-                    {/*    <Field type="text" name="email" value={values.email} placeholder={"login"}*/}
-                    {/*           onCnage={handleChange}*/}
-                    {/*        className={errors.email && touched.email  && s.errorinput}*/}
-                    {/*    />*/}
-                    {/*    <ErrorMessage name="email" component="div" className={s.errortext}/>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*    <Field type="password" name="password" value={values.password} placeholder={"password"}*/}
-                    {/*           onCnage={handleChange}*/}
-                    {/*           className={errors.password && touched.password && s.errorinput}*/}
-                    {/*    />*/}
-                    {/*    <ErrorMessage name="password" component="div" className={s.errortext}/>*/}
-                    {/*</div>*/}
+                    {createField("text","email","login",errors.email,touched.email,"email","div")}
+                    {createField("password","password","password",errors.password,touched.password,"password","div")}
+                    <div>{captcha && <img src={captcha}/>}</div>
+                    <div>{captcha && createField("text","captcha","captcha",'',false,"captcha","div")}</div>
                     <div>
                         <Field type="checkbox" name="rememberMe" onCnage={handleChange}/>remember me
                     </div>
@@ -100,7 +85,8 @@ export const LoginForm = ({isAuth,errorMessage,getLogin}:loginFormProps) => {
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
     return {
         isAuth: state.auth.isAuth,
-        errorMessage: state.auth.errorMessage
+        errorMessage: state.auth.errorMessage,
+        captcha:state.auth.captcha
     }
 }
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {ProfileType} from "../redux/profile-reducer";
 
 
 
@@ -33,8 +34,9 @@ export const authApi = {
             return response.data
         })
     },
-    getlogin: (email:string,password:string,remmemberMe:boolean) => {
-        return instatce.post(`/auth/login`,{email:email,password:password,remmemberMe:remmemberMe}).then(response => {
+    getlogin: (email:string,password:string,remmemberMe:boolean,captcha: string | null) => {
+        console.log(captcha)
+        return instatce.post(`/auth/login`,{email:email,password:password,remmemberMe:remmemberMe,captcha:captcha}).then(response => {
             return response.data
         })
     },
@@ -42,7 +44,18 @@ export const authApi = {
         return instatce.delete(`/auth/login`).then(response => {
             return response.data
         })
+    },
+
+}
+
+export const SecurityApi={
+    getCaptcha:()=>{
+        return instatce.get(`/security/get-captcha-url`).then(response => {
+            return response
+        })
     }
+
+
 }
 
 
@@ -57,15 +70,19 @@ export const profileApi = {
     },
     getStatus: (id: number) => {
         return instatce.get("/profile/status/" + id).then(response => {
+
             return response.data
         })
     },
     updateStatus: (status: string) => {
         return instatce.put("/profile/status/", {status: status})
     },
-    savePhoto:(file:string)=>{
+    savePhoto:(file:File)=>{
         let formData=new FormData()
         formData.append("image",file)
         return instatce.put("/profile/photo/",formData,{headers:{"Content-Type":"multipart/form-data"}} )
-    }
+    },
+    saveProfile:(profile:ProfileType) => {
+        return instatce.put("/profile/", profile)
+    },
 }

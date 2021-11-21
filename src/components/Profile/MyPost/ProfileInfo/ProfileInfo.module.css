@@ -6,3 +6,12 @@
 .ava{
     border-radius: 10px;
 }
+
+.contact{
+    padding-left: 20px;
+}
+
+.errortext{
+    color:darkred;
+    font-weight: bold;
+}

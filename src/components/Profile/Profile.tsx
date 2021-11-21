@@ -9,7 +9,10 @@ type ProfileTypeProps = {
     status: string
     updateStatus: (status: string) => void
     isOwner:boolean
-    savePhoto:any///////////////////////////////////////////////
+    savePhoto:(photo:File)=>void
+    saveProfile:(profile:ProfileType)=>void
+    errorMessage:string
+    flagEditMode:boolean
 }
 
 export const Profile: React.FC<ProfileTypeProps> = (props) => {
