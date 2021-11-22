@@ -12,6 +12,7 @@ const SET_STATUS = "samurai-network/profile/SET_STATUS"
 const SET_USER_PHOTO = "samurai-network/profile/SET_USER_PHOTO"
 const ERROR_MESSAGE_PROFILE = "samurai-network/profile/ERROR_MESSAGE_PROFILE"
 const SET_EDIT_MODE = "samurai-network/profile/SET_EDIT_MODE"
+const SET_ERROR_STATUS="samurai-network/profile/SET_ERROR_STATUS"
 
 export type PostType = {
     id: number
@@ -50,6 +51,8 @@ export type InitialProfilePageType = {
     status: string
     errorMessage: string
     flagEditMode: boolean
+    errorStatus:boolean
+    errorStatusText:string
 }
 
 
@@ -80,7 +83,9 @@ let initialstate: InitialProfilePageType = {
     },
     status: "",
     errorMessage: "",
-    flagEditMode: false
+    flagEditMode: false,
+    errorStatus:false,
+    errorStatusText:""
 }
 
 
@@ -100,6 +105,8 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
             return {...state, errorMessage: action.errorMessage}
         case SET_EDIT_MODE:
             return {...state, flagEditMode: action.flagEditMode}
+        case SET_ERROR_STATUS:
+            return {...state,errorStatus:action.errorStatus,errorStatusText:action.errorStatusText}
         default:
             return state
     }
@@ -112,6 +119,8 @@ export const deletePostActionCreator = (id: number) => ({type: DELETE_POST, id})
 export const setUserPhoto = (file: PhotoType) => ({type: SET_USER_PHOTO, file}) as const
 export const setErrorMessageProfile = (errorMessage: string) => ({type: ERROR_MESSAGE_PROFILE, errorMessage}) as const
 export const setProfileFlag = (flagEditMode: boolean) => ({type: SET_EDIT_MODE, flagEditMode}) as const
+export const setModalErrorStatus=(errorStatus:boolean,errorStatusText:string)=> ({type: SET_ERROR_STATUS,errorStatus,errorStatusText }) as const
+
 
 export const getProfileUser = (userId: number) => async (dispatch: Dispatch<ActionValuesType>) => {
     let data = await profileApi.getProfile(userId)
@@ -126,9 +135,15 @@ export const getUserStatus = (userId: number) => async (dispatch: Dispatch<Actio
 }
 
 export const updateUserStatus = (status: string) => async (dispatch: Dispatch<ActionValuesType>) => {
-    let response = await profileApi.updateStatus(status)
-    if (response.data.resultCode === 0) {
-        dispatch(setUserStatus(status))
+    try {
+        let response = await profileApi.updateStatus(status)
+        if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(status))
+            dispatch(setModalErrorStatus(false,""))
+        }
+    }catch(error){
+        dispatch(setModalErrorStatus(true,"Status not correct"))
+
     }
 
 }

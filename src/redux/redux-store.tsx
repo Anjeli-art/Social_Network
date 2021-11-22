@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {
     addPostActionCreator, deletePostActionCreator,
-    profileReducer, setErrorMessageProfile, setProfileFlag, setUserPhoto,
+    profileReducer, setErrorMessageProfile, setModalErrorStatus, setProfileFlag, setUserPhoto,
     setUsersProfile, setUserStatus,
 } from "./profile-reducer";
 import {AddMessageType, DeleteMessageType, dialogsReducer} from "./dialogs-reducer";
@@ -39,6 +39,8 @@ export type ActionValuesType =
     | ReturnType<typeof setErrorMessageProfile>
     | ReturnType<typeof setProfileFlag>
     | ReturnType<typeof getCapthca>
+    | ReturnType<typeof setModalErrorStatus>
+
 let RootReducer = combineReducers({
     profilepage: profileReducer,
     dialogepage: dialogsReducer,
