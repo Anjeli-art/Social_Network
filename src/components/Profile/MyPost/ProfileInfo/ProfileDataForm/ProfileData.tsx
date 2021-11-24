@@ -5,14 +5,14 @@ import s from "../ProfileInfo.module.css";
 type ProfileDataType={
     profile: ProfileType
     isOwner:boolean
-    goToEditMode:(mode:boolean)=>void
+    goToEditMode:()=>void
 
 }
 
 export const ProfileData: React.FC<ProfileDataType> = ({profile,isOwner,goToEditMode,}) => {
     return (
         <div>
-            {isOwner && <button onClick={()=>goToEditMode(true)}>edit</button>}
+            {isOwner && <button onClick={()=>goToEditMode()}>edit</button>}
             <p><b>Name:</b>{profile.fullName}</p>
             <p><b>Looking for a job:</b>{profile.lookingForAJob ? "yes" : "no"}</p>
             {profile.lookingForAJob && <p><b>My professional skills:</b>{profile.lookingForAJobDescription}</p>}

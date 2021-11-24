@@ -42,6 +42,7 @@ type PropsType = RouteComponentProps<PathParams> & ProfileAPIType
 
 export class ProfileAPIComponent extends React.Component <PropsType> {
 
+
     refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
@@ -56,31 +57,29 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
     }
 
     componentDidMount() {
-        console.log(this.props.flagEditMode, 'EDIT_FLAG')
         this.refreshProfile()
 
     }
 
     componentDidUpdate(prevProps: any) {
-        if (this.props.match.params.userId != prevProps.match.params.userId) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
         }
+
     }
 
 
     render() {
-        console.log(this.props.errorMessage)
         return (
-
-            <Profile {...this.props}
-                     profile={this.props.profile}
-                     status={this.props.status}
-                     updateStatus={this.props.updateUserStatus}
-                     isOwner={!this.props.match.params.userId}
-                     savePhoto={this.props.savePhoto}
-                     saveProfile={this.props.saveProfile}
-                     errorMessage={this.props.errorMessage}
-                     flagEditMode={this.props.flagEditMode}
+            <Profile
+                profile={this.props.profile}
+                status={this.props.status}
+                updateStatus={this.props.updateUserStatus}
+                isOwner={!this.props.match.params.userId}
+                savePhoto={this.props.savePhoto}
+                saveProfile={this.props.saveProfile}
+                errorMessage={this.props.errorMessage}
+                flagEditMode={this.props.flagEditMode}
             />
 
         )
@@ -88,6 +87,7 @@ export class ProfileAPIComponent extends React.Component <PropsType> {
 }
 
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
+
     return {
         profile: state.profilepage.profile,
         status: state.profilepage.status,
@@ -98,7 +98,7 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
     }
 }
 
-const ProfileContainer = compose<ComponentType>(connect(mapStateToProps,
+export default compose<ComponentType>(connect(mapStateToProps,
     {
         setUsersProfile,
         getProfileUser,
@@ -108,4 +108,4 @@ const ProfileContainer = compose<ComponentType>(connect(mapStateToProps,
         saveProfile
     }), withRouter)(ProfileAPIComponent)
 
-export default ProfileContainer
+// export default ProfileContainer

@@ -52,9 +52,8 @@ export const ProfileDataForm = ({profile, goToEditMode, saveProfile}: ProfileDat
                 return errors;
             }}
             onSubmit={(values) => {
-                console.log("ddd")
                 saveProfile((values))
-                goToEditMode(false)
+                // goToEditMode(false)
 
             }}>
             {({

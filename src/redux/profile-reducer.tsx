@@ -12,7 +12,7 @@ const SET_STATUS = "samurai-network/profile/SET_STATUS"
 const SET_USER_PHOTO = "samurai-network/profile/SET_USER_PHOTO"
 const ERROR_MESSAGE_PROFILE = "samurai-network/profile/ERROR_MESSAGE_PROFILE"
 const SET_EDIT_MODE = "samurai-network/profile/SET_EDIT_MODE"
-const SET_ERROR_STATUS="samurai-network/profile/SET_ERROR_STATUS"
+const SET_ERROR_STATUS = "samurai-network/profile/SET_ERROR_STATUS"
 
 export type PostType = {
     id: number
@@ -51,8 +51,8 @@ export type InitialProfilePageType = {
     status: string
     errorMessage: string
     flagEditMode: boolean
-    errorStatus:boolean
-    errorStatusText:string
+    errorStatus: boolean
+    errorStatusText: string
 }
 
 
@@ -84,8 +84,8 @@ let initialstate: InitialProfilePageType = {
     status: "",
     errorMessage: "",
     flagEditMode: false,
-    errorStatus:false,
-    errorStatusText:""
+    errorStatus: false,
+    errorStatusText: ""
 }
 
 
@@ -106,7 +106,7 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
         case SET_EDIT_MODE:
             return {...state, flagEditMode: action.flagEditMode}
         case SET_ERROR_STATUS:
-            return {...state,errorStatus:action.errorStatus,errorStatusText:action.errorStatusText}
+            return {...state, errorStatus: action.errorStatus, errorStatusText: action.errorStatusText}
         default:
             return state
     }
@@ -119,7 +119,11 @@ export const deletePostActionCreator = (id: number) => ({type: DELETE_POST, id})
 export const setUserPhoto = (file: PhotoType) => ({type: SET_USER_PHOTO, file}) as const
 export const setErrorMessageProfile = (errorMessage: string) => ({type: ERROR_MESSAGE_PROFILE, errorMessage}) as const
 export const setProfileFlag = (flagEditMode: boolean) => ({type: SET_EDIT_MODE, flagEditMode}) as const
-export const setModalErrorStatus=(errorStatus:boolean,errorStatusText:string)=> ({type: SET_ERROR_STATUS,errorStatus,errorStatusText }) as const
+export const setModalErrorStatus = (errorStatus: boolean, errorStatusText: string) => ({
+    type: SET_ERROR_STATUS,
+    errorStatus,
+    errorStatusText
+}) as const
 
 
 export const getProfileUser = (userId: number) => async (dispatch: Dispatch<ActionValuesType>) => {
@@ -135,14 +139,17 @@ export const getUserStatus = (userId: number) => async (dispatch: Dispatch<Actio
 }
 
 export const updateUserStatus = (status: string) => async (dispatch: Dispatch<ActionValuesType>) => {
+
     try {
         let response = await profileApi.updateStatus(status)
         if (response.data.resultCode === 0) {
             dispatch(setUserStatus(status))
-            dispatch(setModalErrorStatus(false,""))
+            dispatch(setModalErrorStatus(false, ""))
+            console.log("Санка сработала без ошибки")
         }
-    }catch(error){
-        dispatch(setModalErrorStatus(true,"Status not correct"))
+    } catch (error) {
+        dispatch(setModalErrorStatus(true, "Status not correct"))
+        console.log("Санка сработала c ошибкой")
 
     }
 
@@ -155,11 +162,11 @@ export const savePhoto = (file: File) => async (dispatch: Dispatch<ActionValuesT
 
 }
 export const saveProfile = (profile: ProfileType) => async (dispatch: ThunkDispatch<RootStateType, undefined, ActionValuesType>, getState: any) => {
+
     let userId = getState().auth.userId
     let response = await profileApi.saveProfile(profile)
-    console.log("444444444444444444444444444444444")
     if (response.data.resultCode === 0) {
-        (getProfileUser(userId))
+       await dispatch(getProfileUser(userId))
         dispatch(setErrorMessageProfile(""))
         dispatch(setProfileFlag(false))
     } else {

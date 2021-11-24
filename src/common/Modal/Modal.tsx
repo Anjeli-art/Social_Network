@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "./Modal.module.css"
 
 type ModalProps = {
@@ -7,8 +7,14 @@ type ModalProps = {
 }
 
 export const Modal: React.FC<ModalProps> = ({isOpen, error}) => {
-console.log(isOpen)
+
     let [closeModal, setCloseModal] = useState(isOpen)
+    console.log(isOpen)
+    console.log(closeModal)
+
+    useEffect(() => {
+        setCloseModal(isOpen)
+    }, [isOpen])
 
     return (
         <div>
@@ -22,5 +28,5 @@ console.log(isOpen)
     )
 
 };
-// <div className={`s.wrapper${props.isOpen ? "open" : "close"}`}>
+
 export default Modal;
