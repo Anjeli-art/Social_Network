@@ -1,8 +1,9 @@
 import React from "react";
-import {addPostActionCreator, PostType} from "../../../redux/profile-reducer";
+import {addPostActionCreator} from "../../../redux/profile-reducer";
 import {MyPost} from "./MyPost";
 import {ActionValuesType, RootStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
+import {PostType} from "../../../redux/types";
 
 
 type MapDispatch = {

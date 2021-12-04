@@ -1,16 +1,10 @@
-import React from 'react';
 import {ActionValuesType} from "./redux-store";
 import {usersApi} from "../api/api";
 import {Dispatch} from "redux";
 import {updateObjectInArray} from "../utils/object-helpers";
+import {UserType} from "./types";
 
 
-// const ADD_POST = "ADD-POST"
-// const UPDATE_NEW_POST = "UPDATE-NEW-POST"
-//
-//
-// export const addPostActionCreator = () => ({type: ADD_POST}) as const
-// export const upDateNewPostActionCreator = (text: string) => ({type: UPDATE_NEW_POST, New: text}) as const//типизация двух видов тут и в экшнкреэйторе
 
 const FOLLOW = "samurai-network/user/FOLLOW"
 const UNFOLLOW = "samurai-network/user/UNFOLLOW"
@@ -20,37 +14,20 @@ const SET_TOTAL_USERSCOUNT = "samurai-network/user/SET_TOTAL_USERSCOUNT"
 const TOGGLE_IS_FETCHING = "samurai-network/user/TOGGLE_IS_FETCHING"
 const TOGGLE_IS_FOLLOWING = "samurai-network/user/TOGGLE_IS_FOLLOWING"
 
-export type UserType = {
-    name: string
-    id: number
-    photos: {
-        "small": null | string,
-        "large": null | string
-    }
-    status: string
-    followed: boolean
-}
 
-export type initialUserPageType = {
-    users: Array<UserType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    followngInProgress: Array<number>
-}
-
-let initialstate: initialUserPageType = {
-    users: [],
+let initialstate = {
+    users: [] as Array<UserType>,
     pageSize: 4,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followngInProgress: []
+    followngInProgress: [] as Array<number>
 }
 
+type InitialUserPageType = typeof initialstate
 
-export const userReducer = (state = initialstate, action: ActionValuesType): initialUserPageType => {
+
+export const userReducer = (state = initialstate, action: ActionValuesType): InitialUserPageType => {
     switch (action.type) {
         case FOLLOW:
             // return {...state, users: state.users.map(el => el.id === action.userId ? {...el, followed: true} : el)}

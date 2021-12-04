@@ -1,13 +1,13 @@
 import React, { ComponentType} from "react";
 import {
-    addMessageActionCreator, DialogType,
-    MessageType,
+    addMessageActionCreator
 } from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {RootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {DialogType, MessageType} from "../../redux/types";
 
 
 
@@ -37,15 +37,6 @@ let mapDicpatchtoProps = (dispatch: Dispatch): MapDicpatch => {
         },
     }
 }
-// let AuthRedirectComponent=(props:PropsTypeDialog)=>{//2 обертка редирект
-//     if (!props.isAuth) return <Redirect to={"/login"}/>
-//     return <Dialogs {...props}/>
-// }
-
-
-// let AuthRedirectComponent = WithAuthRedirect(Dialogs)//2 обертка редирект самописный хок //заменим компосе
-//
-// export const DialogsContainer = connect(mapStateToProps, mapDicpatchtoProps)(AuthRedirectComponent) // 1 обертка конект редакс
 
 
 const DialogsContainer = compose<ComponentType>(connect(mapStateToProps, mapDicpatchtoProps), WithAuthRedirect)(Dialogs)

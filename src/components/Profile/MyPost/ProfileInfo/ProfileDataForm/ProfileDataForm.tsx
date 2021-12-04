@@ -1,13 +1,13 @@
-import {ProfileType} from "../../../../../redux/profile-reducer";
+
 import React from "react";
 import {Field, Formik} from "formik";
 import {createField} from "../../../../../utils/form-helper";
 import s from "../ProfileInfo.module.css";
+import {ProfileType} from "../../../../../redux/types";
 
 
 type ProfileDataFormType = {
     saveProfile: (profile: ProfileType) => void
-    goToEditMode: (mode: boolean) => void
     profile: ProfileType
 
 }
@@ -18,7 +18,7 @@ type ErrorsType = {
     lookingForAJobDescription?: string
     aboutMe?: string
 }
-export const ProfileDataForm = ({profile, goToEditMode, saveProfile}: ProfileDataFormType) => {
+export const ProfileDataForm = ({profile, saveProfile}: ProfileDataFormType) => {
 
 
     return (
@@ -53,7 +53,6 @@ export const ProfileDataForm = ({profile, goToEditMode, saveProfile}: ProfileDat
             }}
             onSubmit={(values) => {
                 saveProfile((values))
-                // goToEditMode(false)
 
             }}>
             {({

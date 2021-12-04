@@ -1,8 +1,8 @@
-import React from 'react';
 import {ActionValuesType, RootStateType} from "./redux-store";
 import {profileApi} from "../api/api";
 import {Dispatch} from "redux";
 import {ThunkDispatch} from "redux-thunk";
+import {PhotoType, PostType, ProfileType} from "./types";
 
 
 const ADD_POST = "samurai-network/profile/ADD-POST"
@@ -14,37 +14,8 @@ const ERROR_MESSAGE_PROFILE = "samurai-network/profile/ERROR_MESSAGE_PROFILE"
 const SET_EDIT_MODE = "samurai-network/profile/SET_EDIT_MODE"
 const SET_ERROR_STATUS = "samurai-network/profile/SET_ERROR_STATUS"
 
-export type PostType = {
-    id: number
-    message: string | undefined
-    likecount: number
-}
 
-export type ContactsType = {
-    github: null | string
-    vk: null | string
-    facebook: null | string
-    instagram: null | string
-    twitter: null | string
-    website: null | string
-    youtube: null | string
-    mainLink: null | string
-}
 
-type PhotoType = {
-    small: string
-    large: string
-}
-export type ProfileType = {
-    contacts: ContactsType
-    aboutMe: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    userId: number
-    photos: PhotoType
-
-}
 export type InitialProfilePageType = {
     posts: PostType[]
     profile: ProfileType
@@ -106,7 +77,8 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
         case SET_EDIT_MODE:
             return {...state, flagEditMode: action.flagEditMode}
         case SET_ERROR_STATUS:
-            return {...state, errorStatus: action.errorStatus, errorStatusText: action.errorStatusText}
+            console.log("редюсер копия объекта")
+            return {...state,errorStatus: action.errorStatus, errorStatusText: action.errorStatusText}
         default:
             return state
     }
@@ -139,7 +111,7 @@ export const getUserStatus = (userId: number) => async (dispatch: Dispatch<Actio
 }
 
 export const updateUserStatus = (status: string) => async (dispatch: Dispatch<ActionValuesType>) => {
-
+    console.log("Санка сработала")
     try {
         let response = await profileApi.updateStatus(status)
         if (response.data.resultCode === 0) {

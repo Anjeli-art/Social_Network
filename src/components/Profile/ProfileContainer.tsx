@@ -5,7 +5,6 @@ import {RootStateType} from "../../redux/redux-store";
 import {
     getProfileUser,
     getUserStatus,
-    ProfileType,
     setUsersProfile,
     updateUserStatus,
     savePhoto,
@@ -13,6 +12,7 @@ import {
 } from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {ProfileType} from "../../redux/types";
 
 
 type MapStateToProps = {
@@ -108,4 +108,3 @@ export default compose<ComponentType>(connect(mapStateToProps,
         saveProfile
     }), withRouter)(ProfileAPIComponent)
 
-// export default ProfileContainer

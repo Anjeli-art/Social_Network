@@ -1,6 +1,5 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
-import {
-    addPostActionCreator, deletePostActionCreator,
+import {addPostActionCreator, deletePostActionCreator,
     profileReducer, setErrorMessageProfile, setModalErrorStatus, setProfileFlag, setUserPhoto,
     setUsersProfile, setUserStatus,
 } from "./profile-reducer";

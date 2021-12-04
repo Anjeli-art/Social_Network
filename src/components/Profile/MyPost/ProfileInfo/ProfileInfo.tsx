@@ -1,13 +1,14 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import s from "./ProfileInfo.module.css"
 import {Preloader} from "../../../../common/preloader/Preloader";
-import {ProfileType, setProfileFlag} from "../../../../redux/profile-reducer";
+import {setProfileFlag} from "../../../../redux/profile-reducer";
 import {StatusWithHooks} from "./Status/StatusWithHooks";
 import userphoto from "../../../../assets/images/images.jpg";
 import {ProfileDataForm} from "./ProfileDataForm/ProfileDataForm";
 import {ProfileData} from "./ProfileDataForm/ProfileData";
 import {useDispatch, useSelector} from "react-redux";
-import {RootStateType} from "../../../../redux/redux-store";
+import {ActionValuesType, RootStateType} from "../../../../redux/redux-store";
+import {ProfileType} from "../../../../redux/types";
 
 
 type ProfileInfoType = {
@@ -54,7 +55,8 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({profile,
                     {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
                     <StatusWithHooks status={status} updateStatus={updateStatus}/>
                     {flagEditModeSelector ?
-                        <ProfileDataForm saveProfile={saveProfile} goToEditMode={goToEditMode} profile={profile}/>
+                        <ProfileDataForm saveProfile={saveProfile}
+                                         profile={profile}/>
                         : <ProfileData profile={profile} isOwner={props.isOwner} goToEditMode={goToEditMode}/>}
                     <p className={s.errortext}>{props.errorMessage}</p>
                 </div>

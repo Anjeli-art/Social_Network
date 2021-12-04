@@ -6,10 +6,9 @@ import {
     follow, getPageBold, getUsers,
     setCurrentPage,
     unfollow,
-    UserType
+
 } from '../../redux/users-reducer';
 import {Users} from './Users';
-import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {
     getcurrentPageState, getfollowngInProgressState,
@@ -17,6 +16,7 @@ import {
     getpageSizeState,
     getTotalUsersCountState, getUsersState
 } from "../../redux/users-selector";
+import {UserType} from "../../redux/types";
 
 
 type  MapDispatch = {
@@ -50,7 +50,7 @@ class UsersAPIComponent extends React.Component<UsesrApiType> {
 
     onPageChanged = (pageNumber: number) => {
         let {pageSize}=this.props
-        this.props.getPageBold(pageNumber,pageSize)//возможно запись не верна пофиксить санку
+        this.props.getPageBold(pageNumber,pageSize)
     }
 
     render() {
@@ -69,18 +69,6 @@ class UsersAPIComponent extends React.Component<UsesrApiType> {
         )
     }
 }
-
-
-// const mapStateToProps = (state: RootStateType): MapStateToProps => {
-//     return {
-//         users: state.userspage.users,
-//         pageSize: state.userspage.pageSize,
-//         totalUsersCount: state.userspage.totalUsersCount,
-//         currentPage: state.userspage.currentPage,
-//         isFetching: state.userspage.isFetching,
-//         followngInProgress: state.userspage.followngInProgress
-//     }
-// }
 
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
     return {

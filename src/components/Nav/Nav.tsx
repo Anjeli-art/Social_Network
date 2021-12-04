@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import s from "./Nav.module.css"
 
 
-export const Nav = () => {
+export const Nav:React.FC = () => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>

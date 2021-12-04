@@ -10,7 +10,6 @@ type MapStateToProps = {
     login: null | string
 }
 type  MapDispatch = {
-    // getAuthHeader:() =>void
     getLogout:()=>void
 }
 type HeaderContainerApiType = MapDispatch & MapStateToProps

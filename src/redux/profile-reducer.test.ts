@@ -1,4 +1,3 @@
-import React from 'react';
 import {addPostActionCreator, deletePostActionCreator, InitialProfilePageType, profileReducer} from "./profile-reducer";
 
 
@@ -28,7 +27,11 @@ let initialstate: InitialProfilePageType = {
             "large": ""
         }
     },
-    status: ""
+    status: "",
+    errorMessage: "",
+    flagEditMode: false,
+    errorStatus: false,
+    errorStatusText: ""
 }
 
 it("message new post should be correct",()=>{

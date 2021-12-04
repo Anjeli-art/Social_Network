@@ -1,27 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import s from "./Modal.module.css"
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "../../redux/redux-store";
+import {setModalErrorStatus} from "../../redux/profile-reducer";
 
-type ModalProps = {
-    isOpen: boolean
-    error: string
-}
 
-export const Modal: React.FC<ModalProps> = ({isOpen, error}) => {
+export const Modal: React.FC = () => {
 
-    let [closeModal, setCloseModal] = useState(isOpen)
-    console.log(isOpen)
-    console.log(closeModal)
+    const errorStatus = useSelector<RootStateType, boolean>(state => state.profilepage.errorStatus)
+    const errorStatusText = useSelector<RootStateType, string>(state => state.profilepage.errorStatusText)
 
-    useEffect(() => {
-        setCloseModal(isOpen)
-    }, [isOpen])
+    const dicpatch=useDispatch()
 
     return (
         <div>
-            {closeModal && <div className={s.wrapper}>
+            {errorStatus && <div className={s.wrapper}>
                 <div className={s.body}>
-                    <div className={s.body_close} onClick={() => setCloseModal(false)}>x</div>
-                    <div><h2>{error}</h2></div>
+                    <div className={s.body_close} onClick={() =>dicpatch(setModalErrorStatus (false,""))}>x</div>
+                    <div><h2>{errorStatusText}</h2></div>
                 </div>
             </div>}
         </div>

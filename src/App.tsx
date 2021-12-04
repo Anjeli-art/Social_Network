@@ -16,9 +16,7 @@ import {RootStateType, store} from "./redux/redux-store";
 import {Preloader} from "./common/preloader/Preloader";
 import {WithSuspense} from "./hoc/WithSuspense";
 import Modal from "./common/Modal/Modal";
-// import DialogsContainer from "./components/Dialog/DialogsContainer";
 const DialogsContainer = React.lazy(() => import("./components/Dialog/DialogsContainer"))
-// import ProfileContainer from "./components/Profile/ProfileContainer";
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"))
 
 type  MapDispatch = {
@@ -34,17 +32,6 @@ type AppProps = MapDispatch & MapStateToProps
 
 export class App extends React.Component<AppProps> {
 
-    // catchAllHendlerError = (promiseRejectionEvent: any) => {
-    //     console.log(promiseRejectionEvent)  обработчик ошибок глобально
-    // }
-    //
-    // componentDidMount() {
-    //     this.props.initialize()
-    //     window.addEventListener("unhandledrejection", this.catchAllHendlerError)
-    // }
-    // componentWillUnmount() {
-    //     window.removeEventListener("unhandledrejection", this.catchAllHendlerError)
-    // }
     componentDidMount() {
         this.props.initialize()
     }
@@ -58,24 +45,12 @@ export class App extends React.Component<AppProps> {
             <div className="app-wrapper">
                 <HeaderContainer/>
                 <Nav/>
-                <Modal error={this.props.errorStatusText} isOpen={this.props.errorStatus}/>
+                <Modal/>
                 <div className="app-wrapper-content">
                     <Switch>
-                        {/*<Route path="/profile/:userId?" render={() => {*/}
-                        {/*    return <React.Suspense fallback={<div>...loading</div>}>*/}
-                        {/*        <ProfileContainer/>*/}
-                        {/*    </React.Suspense>*/}
-                        {/*}}/>*/}
-                        {/*<Route path="/dialogs" render={() => {*/}
-                        {/*    return <React.Suspense fallback={<div>...loading</div>}>*/}
-                        {/*        <DialogsContainer/>*/}
-                        {/*    </React.Suspense>*/}
-                        {/*}}/>*/}
                         <Route exact path="/" render={() => <Redirect to={"/profile"}/>}/>
                         <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
                         <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
-                        {/*<Route path="/profile/:userId?" render={()=><ProfileContainer/>}/>*/}
-                        {/*<Route path="/dialogs" render={()=><DialogsContainer/>}/>*/}
                         <Route path="/users" render={() =>
                             <UsersContainer/>}/>
                         <Route path="/news" render={() => <News/>}/>

@@ -2,8 +2,8 @@ import React from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogType, MessageType} from "../../redux/dialogs-reducer";
 import {useFormik} from "formik";
+import {DialogType, MessageType} from "../../redux/types";
 
 
 type DialogTypeProps = {
@@ -13,8 +13,6 @@ type DialogTypeProps = {
     isAuth: boolean
 
 }
-
-//<DialogType & MymessageType>аналог верней записи сработает если мы склеиваем два одинаковых обЪекта
 
 export const Dialogs: React.FC<DialogTypeProps> = (props) => {
 

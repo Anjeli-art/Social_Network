@@ -1,4 +1,3 @@
-import React from 'react';
 import {ActionValuesType, RootStateType} from "./redux-store";
 import {authApi, SecurityApi} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
@@ -7,7 +6,7 @@ const SET_USER_DATA = "samurai-network/auth/SET_USER_DATA"
 const ERROR_MESSAGE = "samurai-network/auth/ERROR_MESSAGE"
 const GET_CAPTCHA_URL = "samurai-network/auth/GET_CAPTCHA_URL"
 
-export type InitialAuthType = {
+type InitialAuthType = {
     userId: null | number
     email: null | string
     login: null | string

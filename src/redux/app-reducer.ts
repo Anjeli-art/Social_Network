@@ -1,4 +1,3 @@
-import React from 'react';
 import {ActionValuesType, RootStateType} from "./redux-store";
 import {ThunkDispatch} from "redux-thunk";
 import {getAuthHeader} from "./auth-reducer";

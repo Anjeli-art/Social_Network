@@ -1,8 +1,8 @@
 import {useFormik} from "formik";
 import React from "react";
-import {PostType} from "../../../redux/profile-reducer";
 import s from "./MyPost.module.css"
 import {Post} from "./Post/Post";
+import {PostType} from "../../../redux/types";
 
 
 export type TypeMyPost = {

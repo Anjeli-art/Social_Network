@@ -1,7 +1,7 @@
 import React from "react";
 import {create} from "react-test-renderer";
 import {Status} from "./Status";
-import axios from "axios";
+
 
 
 describe("Status component", () => {
@@ -56,29 +56,4 @@ describe("Status component", () => {
 });
 
 
-// const instatce = axios.create({
-//     withCredentials: true,
-//     baseURL: 'https://social-network.samuraijs.com/api/1.0',
-//     headers: {"API-KEY": "7ccc0386-8558-4e56-b3f7-82cd09cd2d3e"}
-// })
-//
-// test("post", () => { ////////////////////////////////////////////////////////////////спросить валеру
-//
-//     const api = {
-//         getlogin: (email: string, password: string, remmemberMe: boolean) => {
-//             return instatce.post(`/auth/login`, {
-//                 email: email,
-//                 password: password,
-//                 remmemberMe: remmemberMe
-//             }).then(response => {
-//                 return response.data
-//             })
-//         }}
-//
-//
-//   // api.getlogin("anjele@bk.ru", "Jirnui2021", true).then(data=>data.resultCode)
-//
-//
-//    return expect(api.getlogin("anjele@bk.ru", "Jirnui2021", true)).resolves.toBe( 0)
-// })
 

@@ -1,5 +1,5 @@
-import React from 'react';
 import {ActionValuesType} from "./redux-store";
+import {DialogType, MessageType} from "./types";
 
 const ADD_MESSAGE = "samurai-network/dialog/ADD-MESSAGE"
 const DELETE_MESSAGE="samurai-network/dialog/DELETE_MESSAGE"
@@ -14,14 +14,7 @@ export type DeleteMessageType={
     type: typeof DELETE_MESSAGE
     id:number
 }
-export type MessageType = {
-    id: number
-    message: string | undefined
-}
-export type DialogType = {
-    id: number
-    name: string
-}
+
 
 export type InitDialogsStateType = {
     messages: MessageType[]

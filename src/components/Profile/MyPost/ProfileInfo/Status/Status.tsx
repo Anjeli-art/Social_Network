@@ -38,7 +38,6 @@ export class Status extends React.Component<StatusType> {
     }
 
     render() {
-        console.log("render ")
         return (
             <div>
                 {!this.state.editMode &&

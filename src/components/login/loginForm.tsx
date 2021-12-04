@@ -26,7 +26,7 @@ type  MapDispatch = {
 type loginFormProps = MapStateToProps & MapDispatch
 
 
-export const LoginForm = ({isAuth,errorMessage,getLogin,captcha}:loginFormProps) => {
+export const LoginForm : React.FC<loginFormProps>= ({isAuth,errorMessage,getLogin,captcha}) => {
 
     if (isAuth) return <Redirect to={"/profile"}/>
 
