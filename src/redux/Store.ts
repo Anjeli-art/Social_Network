@@ -59,11 +59,11 @@
 window.store = store
 
 
-// export type PostTypeMap = {
-//     message: string | undefined
-//     likecount: number
-// }
-// export type MessageTypeMap = {
-//     message: string | undefined
-// }
+export type PostTypeMap = {
+    message: string | undefined
+    likecount: number
+}
+export type MessageTypeMap = {
+    message: string | undefined
+}
 

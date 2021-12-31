@@ -23,7 +23,7 @@ export const Users: React.FC<PropsType> = ({totalUsersCount, pageSize, currentPa
                        onPageChanged={onPageChanged}/>
             {users.map(el => <User user={el} key={el.id} follow={props.follow} unfollow={props.unfollow} followngInProgress={props.followngInProgress}/>
                 )
-            })
+            }
         </div>
     );
 
