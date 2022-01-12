@@ -6,23 +6,17 @@ const SET_USER_DATA = "samurai-network/auth/SET_USER_DATA"
 const ERROR_MESSAGE = "samurai-network/auth/ERROR_MESSAGE"
 const GET_CAPTCHA_URL = "samurai-network/auth/GET_CAPTCHA_URL"
 
-type InitialAuthType = {
-    userId: null | number
-    email: null | string
-    login: null | string
-    isAuth: boolean
-    errorMessage: null | string
-    captcha: string | null
+
+let initialstate = {
+    userId: null as null | number,
+    email: null as null | string,
+    login: null as null | string,
+    isAuth: false,
+    errorMessage: null as null | string,
+    captcha: null as string | null
 }
 
-let initialstate: InitialAuthType = {
-    userId: null,
-    email: null,
-    login: null,
-    isAuth: false,
-    errorMessage: null,
-    captcha: null
-}
+export type InitialAuthType = typeof initialstate
 
 export const authReducer = (state = initialstate, action: ActionValuesType): InitialAuthType => {
     switch (action.type) {

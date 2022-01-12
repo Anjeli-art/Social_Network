@@ -15,27 +15,21 @@ export type DeleteMessageType={
     id:number
 }
 
-
-export type InitDialogsStateType = {
-    messages: MessageType[]
-    dialogs: DialogType[]
-}
-
-let initialstate: InitDialogsStateType = {
+let initialstate = {
     messages: [
         {id: 1, message: "Hello"},
         {id: 2, message: "How are you?"},
         {id: 3, message: "Hi"},
-        {id: 4, message: "Yo"},],
+        {id: 4, message: "Yo"},]as MessageType[],
     dialogs: [
         {id: 1, name: "Dima"},
         {id: 2, name: "Sasha"},
         {id: 3, name: "Kolya"},
         {id: 4, name: "Sveta"},
         {id: 5, name: "Andrey"},
-        {id: 6, name: "Vitya"},]
+        {id: 6, name: "Vitya"},]as DialogType[]
 }
-
+export type InitDialogsStateType=typeof initialstate
 
 export const dialogsReducer = (state = initialstate, action: ActionValuesType): InitDialogsStateType => {
     switch (action.type) {

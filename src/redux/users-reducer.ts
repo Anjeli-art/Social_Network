@@ -24,7 +24,7 @@ let initialstate = {
     followngInProgress: [] as Array<number>
 }
 
-type InitialUserPageType = typeof initialstate
+export type InitialUserPageType = typeof initialstate
 
 
 export const userReducer = (state = initialstate, action: ActionValuesType): InitialUserPageType => {

@@ -6,15 +6,13 @@ import {getAuthHeader} from "./auth-reducer";
 const SET_INITIALAIZED = "SET_INITIALAIZED"
 
 
-export type InitialAppType = {
-    initialized: boolean
-}
-
-let initialstate: InitialAppType = {
+let initialAppState = {
     initialized: false
 }
 
-export const appReducer = (state = initialstate, action: ActionValuesType): InitialAppType => {
+export type InitialAppType = typeof initialAppState
+
+export const appReducer = (state = initialAppState, action: ActionValuesType): InitialAppType => {
     switch (action.type) {
 
         case SET_INITIALAIZED:

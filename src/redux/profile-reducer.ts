@@ -15,43 +15,32 @@ const SET_EDIT_MODE = "samurai-network/profile/SET_EDIT_MODE"
 const SET_ERROR_STATUS = "samurai-network/profile/SET_ERROR_STATUS"
 
 
-
-export type InitialProfilePageType = {
-    posts: PostType[]
-    profile: ProfileType
-    status: string
-    errorMessage: string
-    flagEditMode: boolean
-    errorStatus: boolean
-    errorStatusText: string
-}
-
-
-let initialstate: InitialProfilePageType = {
+let initialstate = {
     posts: [
         {id: 1, message: "first post", likecount: 3},
-        {id: 2, message: "second post", likecount: 4}],
-    profile: {
-        "aboutMe": "",
-        "contacts": {
-            "facebook": "",
-            "website": null,
-            "vk": "",
-            "twitter": "",
-            "instagram": "",
-            "youtube": null,
-            "github": "",
-            "mainLink": null
-        },
-        "lookingForAJob": true,
-        "lookingForAJobDescription": "web dev",
-        "fullName": "",
-        "userId": 19622,
-        "photos": {
-            "small": "",
-            "large": ""
-        }
-    },
+        {id: 2, message: "second post", likecount: 4}] as PostType[],
+    profile:null as ProfileType|null,
+        // {
+        //     "aboutMe": "",
+        //     "contacts": {
+        //         "facebook": "",
+        //         "website": null,
+        //         "vk": "",
+        //         "twitter": "",
+        //         "instagram": "",
+        //         "youtube": null,
+        //         "github": "",
+        //         "mainLink": null
+        //     },
+        //     "lookingForAJob": true,
+        //     "lookingForAJobDescription": "web dev",
+        //     "fullName": "",
+        //     "userId": 19622,
+        //     "photos": {
+        //         "small": "",
+        //         "large": ""
+        //     }
+        // }as ProfileType,
     status: "",
     errorMessage: "",
     flagEditMode: false,
@@ -59,6 +48,7 @@ let initialstate: InitialProfilePageType = {
     errorStatusText: ""
 }
 
+export type InitialProfilePageType = typeof initialstate
 
 export const profileReducer = (state = initialstate, action: ActionValuesType): InitialProfilePageType => {
     switch (action.type) {
@@ -69,7 +59,7 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
         case SET_STATUS:
             return {...state, status: action.status}
         case SET_USER_PHOTO:
-            return {...state, profile: {...state.profile, photos: action.file}}
+            return {...state, profile: {...state.profile, photos: action.file}as ProfileType}
         case DELETE_POST:
             return {...state, posts: state.posts.filter(el => el.id !== action.id)}
         case ERROR_MESSAGE_PROFILE:
@@ -78,7 +68,7 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
             return {...state, flagEditMode: action.flagEditMode}
         case SET_ERROR_STATUS:
             console.log("редюсер копия объекта")
-            return {...state,errorStatus: action.errorStatus, errorStatusText: action.errorStatusText}
+            return {...state, errorStatus: action.errorStatus, errorStatusText: action.errorStatusText}
         default:
             return state
     }
@@ -138,7 +128,7 @@ export const saveProfile = (profile: ProfileType) => async (dispatch: ThunkDispa
     let userId = getState().auth.userId
     let response = await profileApi.saveProfile(profile)
     if (response.data.resultCode === 0) {
-       await dispatch(getProfileUser(userId))
+        await dispatch(getProfileUser(userId))
         dispatch(setErrorMessageProfile(""))
         dispatch(setProfileFlag(false))
     } else {
