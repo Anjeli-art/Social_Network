@@ -82,7 +82,7 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
 }
 
 
-export const UsersContainer = compose<ComponentType>(connect(mapStateToProps, {
+export const UsersContainer = compose<ComponentType>(connect<MapStateToProps,MapDispatch,unknown ,RootStateType>(mapStateToProps, {
     follow, unfollow,
     setCurrentPage,
     getUsers,

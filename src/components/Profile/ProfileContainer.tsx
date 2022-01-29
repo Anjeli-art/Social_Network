@@ -98,7 +98,7 @@ const mapStateToProps = (state: RootStateType): MapStateToProps => {
     }
 }
 
-export default compose<ComponentType>(connect(mapStateToProps,
+export default compose<ComponentType>(connect(mapStateToProps, ////////?????????????????????????????????типизация коннект
     {
         setUsersProfile,
         getProfileUser,

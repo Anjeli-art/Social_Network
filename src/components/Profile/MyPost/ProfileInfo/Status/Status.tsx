@@ -6,7 +6,12 @@ export type StatusType = {
     updateStatus: (status: string) => void
 }
 
-export class Status extends React.Component<StatusType> {
+type StateType={
+    editMode: boolean
+    status:string
+}
+
+export class Status extends React.Component<StatusType,StateType> {
 
 
     state = {
@@ -29,7 +34,7 @@ export class Status extends React.Component<StatusType> {
         this.setState({status: e.currentTarget.value})
     }
 
-    componentDidUpdate(prevProps: Readonly<StatusType>, prevState: Readonly<{ editMode: boolean, status: string }>) {
+    componentDidUpdate(prevProps: Readonly<StatusType>, prevState: Readonly<StateType>) {
         if (prevProps.status !== this.props.status) {
             this.setState({
                 status: this.props.status

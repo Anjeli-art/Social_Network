@@ -19,28 +19,29 @@ let initialstate = {
     posts: [
         {id: 1, message: "first post", likecount: 3},
         {id: 2, message: "second post", likecount: 4}] as PostType[],
-    profile:null as ProfileType|null,
-        // {
-        //     "aboutMe": "",
-        //     "contacts": {
-        //         "facebook": "",
-        //         "website": null,
-        //         "vk": "",
-        //         "twitter": "",
-        //         "instagram": "",
-        //         "youtube": null,
-        //         "github": "",
-        //         "mainLink": null
-        //     },
-        //     "lookingForAJob": true,
-        //     "lookingForAJobDescription": "web dev",
-        //     "fullName": "",
-        //     "userId": 19622,
-        //     "photos": {
-        //         "small": "",
-        //         "large": ""
-        //     }
-        // }as ProfileType,
+    profile:
+        // null as ProfileType|null,
+        {
+            "aboutMe": "",
+            "contacts": {
+                "facebook": "",
+                "website": null,
+                "vk": "",
+                "twitter": "",
+                "instagram": "",
+                "youtube": null,
+                "github": "",
+                "mainLink": null
+            },
+            "lookingForAJob": true,
+            "lookingForAJobDescription": "web dev",
+            "fullName": "",
+            "userId": 19622,
+            "photos": {
+                "small": "",
+                "large": ""
+            }
+        }as ProfileType,
     status: "",
     errorMessage: "",
     flagEditMode: false,
@@ -59,7 +60,7 @@ export const profileReducer = (state = initialstate, action: ActionValuesType): 
         case SET_STATUS:
             return {...state, status: action.status}
         case SET_USER_PHOTO:
-            return {...state, profile: {...state.profile, photos: action.file}as ProfileType}
+            return {...state, profile: {...state.profile, photos: action.file}}
         case DELETE_POST:
             return {...state, posts: state.posts.filter(el => el.id !== action.id)}
         case ERROR_MESSAGE_PROFILE:

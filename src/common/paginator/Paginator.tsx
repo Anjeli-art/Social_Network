@@ -12,7 +12,7 @@ type PropsTypePaginator = {
 const Paginator: React.FC<PropsTypePaginator> = ({totalUsersCount, pageSize, currentPage, onPageChanged, ...props}) => {
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize)
-    let pages = []
+    let pages:Array<number> = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
@@ -30,7 +30,7 @@ const Paginator: React.FC<PropsTypePaginator> = ({totalUsersCount, pageSize, cur
 
             {pages.filter(el => el >= leftpage && el <= rightpage)
                 .map(el => {
-                    return <span className={cn({[s.pageActive]:currentPage === el},s.block)}
+                    return <span className={cn({[s.pageActive]: currentPage === el}, s.block)}
                                  key={el}
                                  onClick={(e) => {
                                      onPageChanged(el)

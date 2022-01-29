@@ -27,4 +27,4 @@ const mapDispatchToProps = (dispatch: (action: ActionValuesType) => void): MapDi
     }
 }
 
-export const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost)
+export const MyPostContainer = connect<MapStateToProps,MapDispatch,unknown ,RootStateType>(mapStateToProps, mapDispatchToProps)(MyPost)

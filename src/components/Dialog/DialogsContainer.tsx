@@ -11,7 +11,7 @@ import {DialogType, MessageType} from "../../redux/types";
 
 
 
-type MapDicpatch = {
+type MapDicpathc = {
     addMessage: (NewMessage:string) => void
 }
 
@@ -20,7 +20,7 @@ type MapStateToPropsType = {
     messages: MessageType[],
 }
 
-type PropsTypeDialog = MapDicpatch & MapStateToPropsType
+type PropsTypeDialog = MapDicpathc & MapStateToPropsType
 
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
@@ -30,7 +30,7 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
 }
 
 
-let mapDicpatchtoProps = (dispatch: Dispatch): MapDicpatch => {
+let mapDicpatchtoProps = (dispatch: Dispatch): MapDicpathc => {
     return {
         addMessage: (NewMessage:string) => {
             dispatch(addMessageActionCreator(NewMessage))
@@ -39,7 +39,7 @@ let mapDicpatchtoProps = (dispatch: Dispatch): MapDicpatch => {
 }
 
 
-const DialogsContainer = compose<ComponentType>(connect(mapStateToProps, mapDicpatchtoProps), WithAuthRedirect)(Dialogs)
+const DialogsContainer = compose<ComponentType>(connect<MapStateToPropsType,MapDicpathc,unknown ,RootStateType>(mapStateToProps, mapDicpatchtoProps), WithAuthRedirect)(Dialogs)
 
 export default DialogsContainer
 
