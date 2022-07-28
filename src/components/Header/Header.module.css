@@ -1,17 +1,13 @@
 .header {
     background-color: #2990ea;
     border: solid 4px #68c5e2;
-    margin-top: 10px;
-    grid-area: h;
-    /*text-align: justify;*/
-    /*letter-spacing: 1px;*/
-    /*height: 8em;*/
-    /*padding: 2em 10%;*/
+    padding: 30px;
+    color: #112a3d;
+    margin-bottom: 40px;
 }
 
 .header img {
-    margin-top: 10px;
-    width: 40px;
+    width: 50px;
 
 }
 
@@ -24,4 +20,12 @@
     text-decoration: none;
     font-size: larger;
     font-weight: bolder;
+}
+
+.buttonLogout{
+    background-color: #112a3d;
+    border: none;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
 }

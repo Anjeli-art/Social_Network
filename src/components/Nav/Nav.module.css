@@ -1,16 +1,24 @@
-.nav {
-    border: solid 4px #68c5e2;
-    background-color: #2990ea;
-    padding: 15px;
-    margin:0px 0px 20px 20px;
-    grid-area: n;
-}
-.item a{
+/*.nav {*/
+/*    border: solid 4px #68c5e2;*/
+/*    background-color: #2990ea;*/
+/*    padding: 15px;*/
+/*    margin:0px 0px 20px 20px;*/
+/*    grid-area: n;*/
+/*}*/
+.item a {
     color: white;
     text-decoration: none
 }
-.item a.active{
+
+.item a.active {
     color: #184e7d;
 }
 
+.nav {
+    border: solid 4px #68c5e2;
+    background-color: #2990ea;
+    width: 20%;
+    padding: 15px;
+    margin: 20px;
+}
 
