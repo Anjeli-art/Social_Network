@@ -52,7 +52,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({profile,
             <div className={s.ava}>
                 <img src={profile.photos.small || userphoto}/>
                 <div>
-                    {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
+                    {props.isOwner && <input type="file"  onChange={onMainPhotoSelected}/>}
                     <StatusWithHooks status={status} updateStatus={updateStatus}/>
                     {flagEditModeSelector ?
                         <ProfileDataForm saveProfile={saveProfile}
