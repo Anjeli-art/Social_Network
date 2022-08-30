@@ -1,18 +1,33 @@
 .header {
     background-color: #2990ea;
     border: solid 4px #68c5e2;
-    padding: 30px;
-    color: #112a3d;
+    padding: 20px;
     margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
 }
 
 .header img {
+    margin: auto 0;
+    display: block;
     width: 50px;
-
 }
 
-.loginBlock {
-    float: right;
+.login_block {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login_block h3{
+    color: #184e7d;
+}
+
+.button_logout {
+    display: block;
 }
 
 .loginBlock a {

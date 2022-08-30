@@ -13,11 +13,11 @@ export const Header: React.FC<PropsType> = (props) => {
     return (
         <header className={s.header}>
             <img src="https://cdn.logo.com/hotlink-ok/logo-social.png"/>
-            <div className={s.loginBlock}>
+            <div>
                     {props.isAuth
-                        ? <div>
+                        ? <div className={s.login_block}>
                             <h3>{props.login}</h3>
-                            <button onClick={props.getLogout} className={s.buttonLogout}>logOut</button>
+                            <button onClick={props.getLogout} className={s.button_logout}>logOut</button>
                     </div>
                         : <NavLink to={"/login"}>Login</NavLink>}
             </div>

@@ -1,6 +1,7 @@
 .dialogs {
     display: grid;
     grid-template-columns: 4fr 10fr;
+    /*display: flex;*/
 }
 
 .dialog {

@@ -1,29 +1,31 @@
 
-*{
+* {
     margin: 0;
     padding: 0;
-    color:#112a3d;
+    color: #112a3d;
     font-weight: bold;
 }
-.app_wrapper{
+
+.app_wrapper {
     width: 1000px;
+    min-height: 100vh;
     background-color: #a0cbf1;
-    margin:0 auto;
+    margin: 0 auto;
     padding-top: 15px;
 }
 
-.app_container{
+.app_container {
     display: flex;
 }
 
-.app_content{
+.app_content {
     margin: 20px;
     padding: 15px;
     border: solid 4px #68c5e2;
     width: 70%;
 }
 
-button{
+button {
     background: #68c5e2;
     border-radius: 10px;
     padding: 8px;
