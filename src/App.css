@@ -4,6 +4,7 @@
     padding: 0;
     color: #112a3d;
     font-weight: bold;
+    box-sizing: border-box;
 }
 
 .app_wrapper {
@@ -16,13 +17,23 @@
 
 .app_container {
     display: flex;
+    height: calc(100vh - 173px);
 }
 
 .app_content {
     margin: 20px;
     padding: 15px;
-    border: solid 4px #68c5e2;
+    border: solid 4px #a0cbf1;
     width: 70%;
+    overflow: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.app_content::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 button {
