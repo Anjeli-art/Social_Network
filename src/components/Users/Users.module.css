@@ -3,10 +3,13 @@
     color: white;
     margin: 20px;
 }
+.userprofileData{
+    text-align: center;
+}
+
 .userdata{
     display: flex;
     margin-left: 100px;
-    border: 4px white solid;
     padding: 15px;
 }
 .username{

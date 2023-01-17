@@ -14,7 +14,7 @@ type PropsTypeUser = {
 
 export const User: React.FC<PropsTypeUser> = ({user, followngInProgress, unfollow, follow}) => {
     return (<div className={s.userprofile}>
-            <div>
+            <div className={s.userprofileData}>
                 <div>
                     <NavLink to={"/profile" + "/" + user.id}>
                         <img src={user.photos.small !== null ? user.photos.small : userphoto}/>
